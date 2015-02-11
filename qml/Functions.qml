@@ -41,10 +41,10 @@ Item {
     // Pause: ok!
 
     function pause() {
-        pullDownMenu.enabled = false
-        root.interactive = false
-        mouseArea.enabled = true
-        pauseMenuItem.visible = true
+        pullDownMenu.enabled = true
+        root.interactive = true
+        mouseArea.enabled = false
+        pauseMenuItem.visible = false
     }
 
     // Tetraminos: ok!
