@@ -51,15 +51,7 @@ Page {
                 font.pixelSize: Theme.fontSizeSmall
                 horizontalAlignment: Text.AlignJustify
                 wrapMode: Text.WordWrap
-            }/*
-            Label {
-                width: parent.width
-                text: qsTr("This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic below to donate :)")
-                color: Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeSmall
-                horizontalAlignment: Text.AlignJustify
-                wrapMode: Text.WordWrap
-            }*/
+            }
             Image {
                 id: image
                 anchors.horizontalCenter: column.horizontalCenter

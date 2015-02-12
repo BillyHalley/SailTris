@@ -14,7 +14,9 @@ Item {
         pullDownMenu.enabled = false
         root.interactive = false
         mouseArea.enabled = true
-        pauseMenuItem.visible = true
+        pauseMenuItem.visible = false
+        downTimer.running = true
+
 
         // Empty grid
 
@@ -41,10 +43,11 @@ Item {
     // Pause: ok!
 
     function pause() {
-        pullDownMenu.enabled = true
-        root.interactive = true
-        mouseArea.enabled = false
-        pauseMenuItem.visible = false
+        pullDownMenu.enabled = !pullDownMenu.enabled
+        root.interactive = !root.interactive
+        mouseArea.enabled = !mouseArea.enabled
+        pauseMenuItem.visible = !pauseMenuItem.visible
+        downTimer.running = !downTimer.running
     }
 
     // Tetraminos: ok!
@@ -225,7 +228,8 @@ Item {
             pullDownMenu.enabled = true
             root.interactive = true
             mouseArea.enabled = false
-            pauseMenuItem.visible = false
+            pauseMenuItem.visible = true
+            downTimer.running = false
         }
     }
 
