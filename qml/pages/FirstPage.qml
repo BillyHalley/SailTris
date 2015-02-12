@@ -13,29 +13,43 @@ import ".."
 
 Page {
     id: page
+
     property int scoreValue
     property int speedValue
-    property int speed
     property int interval
+    property int level
+
     property int activeBlock
-    property int futureBlock
-    property variant activeColor
-    property real centerX
-    property real centerY
+    property int futureBlock: -1
+
     // 0 = l_normal; 1 = l_reverse;
     // 2 = s_normal; 3 = s_reverse;
     // 4 = t_normal; 5 = square;
     // 6 = line
+
+    property variant activeColor
+    property variant futureColor
+
+    property real centerX
+    property real centerY
+
+    property real futureCenterX
+    property real futureCenterY
 
     Functions {
         id: functions
     }
     Timer {
         id: downTimer
-        interval: interval - speed
+        interval: interval
         repeat: true
-        running: true
-        onTriggered: functions.down()
+        running: false
+        onTriggered: {
+            functions.flow()
+            scoreValue += 1
+            speedValue += 1
+            console.log("Flow")
+        }
     }
 
     SilicaFlickable {
@@ -59,9 +73,10 @@ Page {
                     dialog.accepted.connect(function() {
                         interval = dialog.timerValue
                         values.opacity = dialog.gridOpacity
-                        rect.color = dialog.gridOpacity ? "green" : "transparent"
+                        rect.color = dialog.gridOpacity ? Theme.secondaryColor : "transparent"
                         debugLabel.opacity = dialog.gridOpacity
                         visible = dialog.gridOpacity ? true : false
+                        consoleLabel.opacity = dialog.gridOpacity
                     })
                 }
                 visible: false
@@ -77,7 +92,7 @@ Page {
 
         Label {
             id: score
-            text: qsTr("Score: ") + scoreValue
+            text:  qsTr("Level: ") + level + "\n" + qsTr("Score: ") + scoreValue
             anchors {
                 top: parent.top
                 left: parent.left
@@ -94,7 +109,34 @@ Page {
                 topMargin: Theme.paddingLarge
                 leftMargin: Theme.paddingLarge
             }
-            text: "speedValue: " + speedValue + " speed: " + speed  + " Timer: " + downTimer.interval
+            text: "Interval: " + interval + " Active: " + activeBlock + " Future: " + futureBlock
+        }
+
+        Label {
+            id: next
+            anchors {
+                right: futureGrid.left
+                rightMargin: Theme.paddingLarge
+                verticalCenter: futureGrid.verticalCenter
+            }
+            text: qsTr("Next:")
+        }
+
+        Grid {
+            id: futureGrid
+            anchors {
+                top: parent.top
+                right: parent.right
+                topMargin: Theme.paddingLarge
+                rightMargin: Theme.paddingLarge
+            }
+            columns: 4
+            rows: 3
+            Repeater {
+                id: futureRepeater
+                model: 12
+                delegate: Dot {width: Theme.paddingLarge*5/3 ;color: Theme.secondaryColor; opacity: 0.1}
+            }
         }
 
         Rectangle {
@@ -157,25 +199,30 @@ Page {
                 onPressed: {
                     prevX = mouseX
                     prevY = mouseY
-                    console.log("pressed")
                 }
                 onReleased: {
-                    if ( Math.abs(prevY-mouseY) < Theme.paddingLarge &&
-                            Math.abs(prevX-mouseX) < Theme.paddingLarge){ // Click
+                    if ( Math.abs(prevY-mouseY) < Theme.paddingMedium &&
+                         Math.abs(prevX-mouseX) < Theme.paddingMedium) { // Click
                         functions.rotate()
                         console.log("Click")
                     }
                     else
                         if ( Math.abs(prevY-mouseY) > Math.abs(prevX-mouseX) )
-                            if ( mouseY > prevY)        // Swipe Down
+                            if ( mouseY > prevY) {        // Swipe Down
                                 functions.down()
-                            else                        // Swipe Up
+                                console.log("Down")
+                            } else {                        // Swipe Up
                                 functions.pause()
+                                console.log("Up")
+                            }
                         else
-                            if ( mouseX > prevX)        // Swipe Right
+                            if ( mouseX > prevX) {        // Swipe Right
                                 functions.right()
-                            else                        // Swipe Left
+                                console.log("Right")
+                            } else {                        // Swipe Left
                                 functions.left()
+                                console.log("Left")
+                            }
                 }
             }
         }

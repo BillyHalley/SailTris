@@ -20,22 +20,20 @@ OTHER_FILES += qml/SailTris.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
     qml/pages/DebugSettings.qml \
+    qml/pages/About.qml \
     qml/Dot.qml \
     qml/Functions.qml \
     rpm/SailTris.spec \
     rpm/SailTris.yaml \
     rpm/SailTris.changes \
-    translations/*.ts \
-    SailTris.desktop \
-    qml/pages/About.qml \
-    qml/pages/pics/donation.gif
-
+    Donation.png \
+    SailTris.desktop
 
 
 # to disable building translations every time, comment out the
 # following CONFIG line
-CONFIG += sailfishapp_i18n
-TRANSLATIONS += translations/SailTris-it_IT.ts
+# CONFIG += sailfishapp_i18n
+# TRANSLATIONS += translations/it_IT.ts
 
 HEADERS +=
 

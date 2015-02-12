@@ -6,8 +6,7 @@ Item {
     property int active: 0 // 0 = empty; 1 = active; 2 = inactive; 3 = wall
     property int dots
 
-    // New Game:
-    // Empty grid, reset score, calls random(): ok
+    // New Game: ok!
 
     function newGame() {
 
@@ -18,26 +17,33 @@ Item {
         downTimer.running = true
 
 
-        // Empty grid
+        // Empty grids
 
-        for (var i = 15; i > 0; i--)
-            for (var j = 1; j < 11; j++) {
+        for ( var i = 15; i > 0; i--)
+            for ( var j = 1; j < 11; j++) {
                 repeater.itemAt(i*12+j).color = Theme.secondaryColor
                 repeater.itemAt(i*12+j).active = 0
                 repeater.itemAt(i*12+j).opacity = 0.1
             }
 
+        for ( i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+
+        activeBlock = -1
+        futureBlock = -1
+
         // Reset score
 
-        page.scoreValue = 0
-        page.speedValue = 0
-        page.speed = 0
-        page.interval = 1000
+        level = 1
+        scoreValue = 0
+        speedValue = 0
+        interval = 1000
 
-        // Calls random()
-        var rand = Math.floor(Math.random()*7)
-        console.log("Casuale: " + rand)
-        random(rand)
+        // Calls generate()
+
+        generate()
     }
 
     // Pause: ok!
@@ -50,9 +56,9 @@ Item {
         downTimer.running = !downTimer.running
     }
 
-    // Tetraminos: ok!
+    // Tetraminos Active: ok!
 
-    function l_normal()  { // 0
+    function l_normal()  { // 0 index = [17,29,41,42]
         console.log("called l_normal()")
         var index = [17,29,41,42]
         centerX = 5
@@ -64,7 +70,7 @@ Item {
             repeater.itemAt(index[i]).active = 1
         }
     }
-    function l_reverse() { // 1
+    function l_reverse() { // 1 index = [18,30,41,42]
         console.log("called l_reverse()")
         var index = [18,30,41,42]
         centerX = 6
@@ -76,9 +82,9 @@ Item {
             repeater.itemAt(index[i]).active = 1
         }
     }
-    function s_normal()  { // 2
+    function s_normal()  { // 2 index = [17,29,30,42]
         console.log("called s_normal()")
-        var index = [17,18,28,29]
+        var index = [17,29,30,42]
         centerX = 5
         centerY = 2
         activeColor = "orange"
@@ -88,9 +94,9 @@ Item {
             repeater.itemAt(index[i]).active = 1
         }
     }
-    function s_reverse() { // 3
+    function s_reverse() { // 3 index = [18,29,30,41]
         console.log("called s_reverse()")
-        var index = [17,18,30,31]
+        var index = [18,29,30,41]
         centerX = 6
         centerY = 2
         activeColor = "green"
@@ -100,11 +106,11 @@ Item {
             repeater.itemAt(index[i]).active = 1
         }
     }
-    function t_normal()  { // 4
+    function t_normal()  { // 4 index = [17,29,30,41]
         console.log("called t_normal()")
-        var index = [16,17,18,29]
-        centerX = 5
-        centerY = 1
+        var index = [17,29,30,41]
+        centerX = 6
+        centerY = 2
         activeColor = "blue"
         for ( var i = 0; i < 4; i++) {
             repeater.itemAt(index[i]).opacity = 1
@@ -112,7 +118,7 @@ Item {
             repeater.itemAt(index[i]).active = 1
         }
     }
-    function square()    { // 5
+    function square()    { // 5 index = [17,18,29,30]
         console.log("called square()")
         var index = [17,18,29,30]
         centerX = 5.5
@@ -124,16 +130,110 @@ Item {
             repeater.itemAt(index[i]).active = 1
         }
     }
-    function line()      { // 6
+    function line()      { // 6 index = [16,17,18,19]
         console.log("called line()")
-        var index = [18,30,42,54]
-        centerX = 6
-        centerY = 3
+        var index = [16,17,18,19]
+        centerX = 5
+        centerY = 1
         activeColor = "cyan"
         for ( var i = 0; i < index.length; i++) {
             repeater.itemAt(index[i]).opacity = 1
             repeater.itemAt(index[i]).color = activeColor
             repeater.itemAt(index[i]).active = 1
+        }
+    }
+
+    // Tetraminos Future: ok!
+
+    function future_l_normal()  { // 0
+        console.log("called future_l_normal()")
+        var index = [1,5,9,10]
+        futureColor = "red"
+        for ( var i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+        for (i = 0; i < 4; i++) {
+            futureRepeater.itemAt(index[i]).opacity = 1
+            futureRepeater.itemAt(index[i]).color = futureColor
+        }
+    }
+    function future_l_reverse() { // 1
+        console.log("called future_l_reverse()")
+        var index = [2,6,9,10]
+        futureColor = "yellow"
+        for ( var i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+        for (i = 0; i < 4; i++) {
+            futureRepeater.itemAt(index[i]).opacity = 1
+            futureRepeater.itemAt(index[i]).color = futureColor
+        }
+    }
+    function future_s_normal()  { // 2
+        console.log("called future_s_normal()")
+        var index = [1,5,6,10]
+        futureColor = "orange"
+        for ( var i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+        for (i = 0; i < 4; i++) {
+            futureRepeater.itemAt(index[i]).opacity = 1
+            futureRepeater.itemAt(index[i]).color = futureColor
+        }
+    }
+    function future_s_reverse() { // 3
+        console.log("called future_s_reverse()")
+        var index = [2,5,6,9]
+        futureColor = "green"
+        for ( var i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+        for (i = 0; i < 4; i++) {
+            futureRepeater.itemAt(index[i]).opacity = 1
+            futureRepeater.itemAt(index[i]).color = futureColor
+        }
+    }
+    function future_t_normal()  { // 4
+        console.log("called future_t_normal()")
+        var index = [1,5,6,9]
+        futureColor = "blue"
+        for ( var i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+        for (i = 0; i < 4; i++) {
+            futureRepeater.itemAt(index[i]).opacity = 1
+            futureRepeater.itemAt(index[i]).color = futureColor
+        }
+    }
+    function future_square()    { // 5
+        console.log("called future_square()")
+        var index = [5,6,9,10]
+        futureColor = "magenta"
+        for ( var i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+        for (i = 0; i < 4; i++) {
+            futureRepeater.itemAt(index[i]).opacity = 1
+            futureRepeater.itemAt(index[i]).color = futureColor
+        }
+    }
+    function future_line()      { // 6
+        console.log("called future_line()")
+        var index = [4,5,6,7]
+        futureColor = "cyan"
+        for ( var i = 0; i < 12; i++) {
+            futureRepeater.itemAt(i).opacity = 0.1
+            futureRepeater.itemAt(i).color = Theme.secondaryColor
+        }
+        for (i = 0; i < 4; i++) {
+            futureRepeater.itemAt(index[i]).opacity = 1
+            futureRepeater.itemAt(index[i]).color = futureColor
         }
     }
 
@@ -196,46 +296,176 @@ Item {
         }
     }
 
-    // Random choice of tetramino: a bit confusing, have to add future block choice
+    // Random choice of tetramino: ok!
 
-    function random(rand) {
-        page.activeBlock = rand
-        if ( rand === 0 && repeater.itemAt(17).active === 0 && repeater.itemAt(29).active === 0
-                        && repeater.itemAt(41).active === 0 && repeater.itemAt(42).active === 0) {
-            l_normal()
-        } else if ( rand === 1 && repeater.itemAt(18).active === 0 && repeater.itemAt(30).active === 0
-                               && repeater.itemAt(41).active === 0 && repeater.itemAt(42).active === 0) {
-            l_reverse()
-        } else if ( rand === 2 && repeater.itemAt(17).active === 0 && repeater.itemAt(18).active === 0
-                               && repeater.itemAt(28).active === 0 && repeater.itemAt(29).active === 0) {
-            s_normal()
-        } else if ( rand === 3 && repeater.itemAt(17).active === 0 && repeater.itemAt(29).active === 0
-                               && repeater.itemAt(30).active === 0 && repeater.itemAt(31).active === 0) {
-            s_reverse()
-        } else if ( rand === 4 && repeater.itemAt(16).active === 0 && repeater.itemAt(17).active === 0
-                               && repeater.itemAt(18).active === 0 && repeater.itemAt(29).active === 0) {
-            t_normal()
-        } else if ( rand === 5 && repeater.itemAt(17).active === 0 && repeater.itemAt(18).active === 0
-                               && repeater.itemAt(29).active === 0 && repeater.itemAt(30).active === 0) {
-            square()
-        } else if ( rand === 6 && repeater.itemAt(18).active === 0 && repeater.itemAt(30).active === 0
-                               && repeater.itemAt(42).active === 0 && repeater.itemAt(54).active === 0 ) {
-            line()
-        } else if ( rand === 7){
-            random(Math.floor(Math.random()*7))
+    function generate() {
+
+        if ( futureBlock === -1 ) {
+            var rand = Math.floor(Math.random()*7)
+            activeBlock = rand
+            switch (activeBlock) {
+            case 0 :
+                l_normal()
+                break
+            case 1 :
+                l_reverse()
+                break
+            case 2 :
+                s_normal()
+                break
+            case 3 :
+                s_reverse()
+                break
+            case 4 :
+                t_normal()
+                break
+            case 5 :
+                square()
+                break
+            case 6 :
+                line()
+                break
+            case 7 :
+                generate()
+                break
+            }
+            var futureRand = Math.floor(Math.random()*7)
+            futureBlock = futureRand
+            switch (futureBlock) {
+            case 0 :
+                future_l_normal()
+                break
+            case 1 :
+                future_l_reverse()
+                break
+            case 2 :
+                future_s_normal()
+                break
+            case 3 :
+                future_s_reverse()
+                break
+            case 4 :
+                future_t_normal()
+                break
+            case 5 :
+                future_square()
+                break
+            case 6 :
+                future_line()
+                break
+            case 7 :
+                generate()
+                break
+            }
+
         } else {
-            console.log("Game Over")
-            pullDownMenu.enabled = true
-            root.interactive = true
-            mouseArea.enabled = false
-            pauseMenuItem.visible = false
-            downTimer.running = false
+            var game = true
+            activeBlock = futureBlock
+            switch (activeBlock) {
+            case 0 :
+                if ( repeater.itemAt(17).active + repeater.itemAt(29).active + repeater.itemAt(41).active + repeater.itemAt(42).active === 0)
+                    l_normal()
+                else {
+                    gameOver()
+                    game = false
+                }
+                break
+            case 1 :
+                if ( repeater.itemAt(18).active + repeater.itemAt(30).active + repeater.itemAt(41).active + repeater.itemAt(42).active === 0)
+                    l_reverse()
+                else {
+                    gameOver()
+                    game = false
+                }
+                break
+            case 2 :
+                if ( repeater.itemAt(17).active + repeater.itemAt(29).active + repeater.itemAt(30).active + repeater.itemAt(42).active === 0)
+                    s_normal()
+                else {
+                    gameOver()
+                    game = false
+                }
+                break
+            case 3 :
+                if ( repeater.itemAt(18).active + repeater.itemAt(29).active + repeater.itemAt(30).active + repeater.itemAt(41).active === 0)
+                    s_reverse()
+                else {
+                    gameOver()
+                    game = false
+                }
+                break
+            case 4 :
+                if ( repeater.itemAt(17).active + repeater.itemAt(29).active + repeater.itemAt(30).active + repeater.itemAt(41).active === 0)
+                    t_normal()
+                else {
+                    gameOver()
+                    game = false
+                }
+                break
+            case 5 :
+                if ( repeater.itemAt(17).active + repeater.itemAt(18).active + repeater.itemAt(29).active + repeater.itemAt(30).active === 0)
+                    square()
+                else {
+                    gameOver()
+                    game = false
+                }
+                break
+            case 6 :
+                if ( repeater.itemAt(16).active + repeater.itemAt(17).active + repeater.itemAt(18).active + repeater.itemAt(19).active === 0)
+                    line()
+                else {
+                    gameOver()
+                    game = false
+                }
+                break
+            }
+            if (game) {
+                futureRand = Math.floor(Math.random()*7)
+                futureBlock = futureRand
+                switch (futureBlock) {
+                case 0 :
+                    future_l_normal()
+                    break
+                case 1 :
+                    future_l_reverse()
+                    break
+                case 2 :
+                    future_s_normal()
+                    break
+                case 3 :
+                    future_s_reverse()
+                    break
+                case 4 :
+                    future_t_normal()
+                    break
+                case 5 :
+                    future_square()
+                    break
+                case 6 :
+                    future_line()
+                    break
+                case 7 :
+                    generate()
+                    break
+                }
+            }
         }
     }
 
-    // Down traslation: ok!
+    // Game over: ok!
 
-    function down() {
+    function gameOver() {
+        pullDownMenu.enabled = true
+        root.interactive = true
+        mouseArea.enabled = false
+        pauseMenuItem.visible = false
+        downTimer.running = false
+        console.log("Game Over")
+    }
+
+    // Down Flow Traslation: ok!
+
+    function flow() {
         var down = 1
         for (var i = 190; i > 12; i-- )
             if (repeater.itemAt(i).active === 1 && repeater.itemAt(i+12).active > 1)
@@ -257,8 +487,29 @@ Item {
                 if (repeater.itemAt(i).active === 1)
                     repeater.itemAt(i).active = 2
             score()
-            var rand = Math.floor(Math.random()*7)
-            random(rand)
+            generate()
+        }
+    }
+
+    // Down Traslation: ok!
+
+    function down() {
+        var down = 1
+        for (var i = 190; i > 12; i-- )
+            if (repeater.itemAt(i).active === 1 && repeater.itemAt(i+12).active > 1)
+                down = 0
+        if ( down === 1 ) {
+            for (i = 190; i > 12; i-- ) {
+                if (repeater.itemAt(i).active === 1) {
+                    repeater.itemAt(i+12).color = repeater.itemAt(i).color
+                    repeater.itemAt(i+12).active = repeater.itemAt(i).active
+                    repeater.itemAt(i+12).opacity = repeater.itemAt(i).opacity
+                    repeater.itemAt(i).color = Theme.secondaryColor
+                    repeater.itemAt(i).active = 0
+                    repeater.itemAt(i).opacity = 0.1
+                }
+            }
+            centerY += 1
         }
     }
 
@@ -312,23 +563,23 @@ Item {
     // Set 10 points for each full line: ok!
     // Set 100 point bonus for combos: ok!
     // Empty full lines and traslate other dots: ok!
-    // Increase speed each 1000 points! maybe consider increasing faster
-    // Set 1000 point bonus for 4 lines combo
+    // Increase speed each 1000 points! ok!
+    // Set 1000 point bonus for 4 lines combo: ok!
 
     function score() {
         var score = 0
         var lines = []
         for (var i = 15; i > 0; i--) {
-            score = 0
+            var full = 0
             for (var j = 1; j < 11; j++) {
                 if (repeater.itemAt(i*12+j).active === 2) {
-                    score++
+                    full++
                 }
             }
-            if (score === 10)
+            if (full === 10)
                 lines[lines.length] = i
         }
-        console.log("Empty lines: " + lines)
+        console.log("Full lines: " + lines)
         score += lines.length*10
 
         // Bonus
@@ -340,14 +591,15 @@ Item {
                 score += 100*lines.length
         }
 
-        page.scoreValue += score
-        page.speedValue += score
+        scoreValue += score
+        speedValue += score
 
         // Increase speed
 
-        if (page.speedValue >= 1000 && (page.speed + 100 + page.scoreValue/100) < 1000){
-            page.speedValue = 0
-            page.speed += 100 + page.scoreValue/100
+        if ( speedValue > 1000){
+            speedValue = 0
+            interval -= interval*0.1
+            level += 1
         }
 
         for (var k = 0; k < lines.length; k++) {

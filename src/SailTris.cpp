@@ -31,8 +31,6 @@
 #ifdef QT_QML_DEBUG
 #include <QtQuick>
 #endif
-#include <QDesktopServices>
-#include <QUrl>
 
 #include <sailfishapp.h>
 
