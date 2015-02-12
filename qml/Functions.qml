@@ -228,7 +228,7 @@ Item {
             pullDownMenu.enabled = true
             root.interactive = true
             mouseArea.enabled = false
-            pauseMenuItem.visible = true
+            pauseMenuItem.visible = false
             downTimer.running = false
         }
     }
