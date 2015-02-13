@@ -27,13 +27,20 @@ OTHER_FILES += qml/SailTris.qml \
     rpm/SailTris.yaml \
     rpm/SailTris.changes \
     Donation.png \
-    SailTris.desktop
+    SailTris.desktop \
+    i18n/translation_it_IT.ts
+
 
 
 # to disable building translations every time, comment out the
 # following CONFIG line
 # CONFIG += sailfishapp_i18n
-# TRANSLATIONS += translations/it_IT.ts
+# TRANSLATIONS += i18n/translation_it_IT.ts
+
+i18n.path = /usr/share/SailTris/i18n
+i18n.files = i18n/translation_it_IT.qm
+
+INSTALLS += i18n
 
 HEADERS +=
 

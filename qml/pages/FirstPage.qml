@@ -115,11 +115,11 @@ Page {
         Label {
             id: next
             anchors {
-                right: futureGrid.left
-                rightMargin: Theme.paddingLarge
-                verticalCenter: futureGrid.verticalCenter
+                bottom: futureGrid.top
+                horizontalCenter: futureGrid.horizontalCenter
             }
-            text: qsTr("Next:")
+            text: qsTr("Next")
+            font.pixelSize: Theme.fontSizeSmall
         }
 
         Grid {
@@ -127,7 +127,7 @@ Page {
             anchors {
                 top: parent.top
                 right: parent.right
-                topMargin: Theme.paddingLarge
+                topMargin: Theme.paddingLarge*2.5
                 rightMargin: Theme.paddingLarge
             }
             columns: 4
@@ -182,7 +182,7 @@ Page {
             height: grid.height
             anchors {
                 top: parent.top
-                topMargin: Theme.paddingLarge * 7
+                topMargin: Theme.paddingLarge * 8
             }
             border.color: "transparent"
             color: "transparent"

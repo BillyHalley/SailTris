@@ -2,10 +2,11 @@ import QtQuick 2.0
 import Sailfish.Silica 1.0
 
 Page {
+    id: page
     SilicaFlickable {
-        anchors.fill: parent
-        contentHeight: column.height
-        ScrollDecorator { }
+        id: flickable
+        anchors.fill: page
+        contentHeight: item.height
         Column {
             id: column
             width: parent.width - Theme.paddingLarge*2
@@ -43,32 +44,32 @@ Page {
                 wrapMode: Text.WordWrap
             }
 
-        }
-        Label {
-            id: imageText
-            anchors {
-                top: column.bottom
-                topMargin: 20
-                left: parent.left
-                leftMargin: Theme.paddingLarge
+            Row {
+                spacing: Theme.paddingMedium
+                Label {
+                    id: imageText
+                    width: column.width/2 - Theme.paddingMedium
+                    textFormat: Text.RichText
+                    text: "<style>a:link { color: " + Theme.highlightColor + "; }</style>" + qsTr("Follow the developement on ") + "<a href=https://openrepos.net/content/billyhalley/sailtris>OpenRepos.net</a>" + qsTr(" and check Wharehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic to donate :)")
+                    color: Theme.secondaryColor
+                    font.pixelSize: Theme.fontSizeSmall - 6
+                    horizontalAlignment: Text.AlignJustify
+                    wrapMode: Text.WordWrap
+                    onLinkActivated: Qt.openUrlExternally("https://openrepos.net/content/billyhalley/sailtris")
+                }
+                Image {
+                    id: image
+                    height: imageText.height
+                    width: imageText.width
+                    fillMode: Image.PreserveAspectFit
+                    source: "Donation.png"
+                }
             }
-            width: column.width/2
-            textFormat: Text.RichText
-            text: "<style>a:link { color: " + Theme.highlightColor + "; }</style>" + qsTr("Follow the developement on ") + "<a href=https://openrepos.net/content/billyhalley/sailtris>OpenRepos.net</a>" + qsTr(" and check Wharehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic to donate :)")
-            color: Theme.secondaryColor
-            font.pixelSize: Theme.fontSizeSmall - 6
-            horizontalAlignment: Text.AlignJustify
-            wrapMode: Text.WordWrap
-            onLinkActivated: Qt.openUrlExternally("https://openrepos.net/content/billyhalley/sailtris")
+
         }
-        Image {
-            id: image
-            anchors.left: imageText.right
-            anchors.leftMargin: Theme.paddingLarge * 2
-            anchors.verticalCenter: imageText.verticalCenter
-            fillMode: Image.PreserveAspectFit
-            source: "Donation.png"
-        }
+
+        VerticalScrollDecorator {flickable: flickable }
+
     }
     MouseArea {
         width: image.width

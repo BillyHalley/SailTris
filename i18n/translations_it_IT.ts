@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS language="it_IT" version="2.0">
+<TS version="2.0" language="it_IT">
 <context>
     <name>About</name>
     <message>
@@ -22,19 +22,31 @@ Scorri verso l&apos;alto per mettere in pausa, per riprendere Scorri verso il ba
     <message>
         <source>You gain 10 points for each completed line! Multiple lines combo gives you 100 bonus points for each line completed!
 Every 1000 point the speed of the game will increase, to increase the challange!</source>
-        <translation type="unfinished">Guadagni 10 punti per ogni linea completata! Combo di più linee ti assegneranno 100 punti bonus per ogni linea completata!
+        <translation type="obsolete">Guadagni 10 punti per ogni linea completata! Combo di più linee ti assegneranno 100 punti bonus per ogni linea completata!
 Ogni 1000 punti la velocità di gioco sarà aumentata, per aumentare la difficoltà!</translation>
     </message>
     <message>
         <source>Follow the developement on  &lt;a href=&quot;https://openrepos.net/content/billyhalley/&quot;&gt;OpenRepos.net&lt;/a&gt;, and check Wharehouse for updates.</source>
-        <translation type="unfinished">Segui lo sviluppo dell&apos;applicazione su  &lt;a href=&quot;https://openrepos.net/content/billyhalley/&quot;&gt;OpenRepos.net&lt;/a&gt;, e controlla Warehouse per gli aggiornamenti.</translation>
+        <translation type="obsolete">Segui lo sviluppo dell&apos;applicazione su  &lt;a href=&quot;https://openrepos.net/content/billyhalley/&quot;&gt;OpenRepos.net&lt;/a&gt;, e controlla Warehouse per gli aggiornamenti.</translation>
     </message>
-    <message>
     <message>
         <source>This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate!
 Click on the pic below to donate :)</source>
-        <translation type="unfinished">Questa app è scritta interamente da BillyHalley, se ti piace, prendi in considerazione l&apos;idea di fare una piccola donazione, lo apprezzerei molto!
+        <translation type="obsolete">Questa app è scritta interamente da BillyHalley, se ti piace, prendi in considerazione l&apos;idea di fare una piccola donazione, lo apprezzerei molto!
 Clicca sull&apos;immagine per donare :)</translation>
+    </message>
+    <message>
+        <source>You gain 1 point for each step in the game and 10 points for each completed line! Multiple lines combo gives you 100 bonus points for each line completed! And 1000 points when four lines are cleared!!
+Every 1000 point you proceed to the next level, and the speed is increased!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Follow the developement on </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source> and check Wharehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic to donate :)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -96,6 +108,14 @@ Clicca sull&apos;immagine per donare :)</translation>
     <message>
         <source>About Page</source>
         <translation type="unfinished">Crediti</translation>
+    </message>
+    <message>
+        <source>Level: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Next:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

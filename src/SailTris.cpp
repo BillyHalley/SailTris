@@ -28,9 +28,9 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifdef QT_QML_DEBUG
+//#ifdef QT_QML_DEBUG
 #include <QtQuick>
-#endif
+//#endif
 
 #include <sailfishapp.h>
 
@@ -45,6 +45,19 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
-    return SailfishApp::main(argc, argv);
+    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+
+    QTranslator translator;
+    translator.load("translation_" + QLocale::system().name(),
+                        "/usr/share/SailTris/i18n");
+    app->installTranslator(&translator);
+
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
+    view->setSource(SailfishApp::pathTo("qml/SailTris.qml"));
+    view->show();
+
+    return app->exec();
+
+    //return SailfishApp::main(argc, argv);
 }
 
