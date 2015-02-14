@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.LocalStorage 2.0
+import "storage.js" as Storage
 
 Item {
     id: functions
@@ -15,7 +17,6 @@ Item {
         mouseArea.enabled = true
         pauseMenuItem.visible = false
         downTimer.running = true
-
 
         // Empty grids
 
@@ -54,6 +55,71 @@ Item {
         mouseArea.enabled = !mouseArea.enabled
         pauseMenuItem.visible = !pauseMenuItem.visible
         downTimer.running = !downTimer.running
+    }
+
+    function saveGame() {
+        savingPage.visible = true
+        savingTimer.running = true
+        pullDownMenu.enabled = false
+        root.interactive = false
+        Storage.set("savedGame", 1)
+        Storage.set("activeColor", activeColor)
+        Storage.set("futureColor", futureColor)
+        Storage.set("centerX", centerX)
+        Storage.set("centerY", centerY)
+        Storage.set("activeBlock", activeBlock)
+        Storage.set("futureBlock", futureBlock)
+        Storage.set("scoreValue", scoreValue)
+        Storage.set("speedValue", speedValue)
+        Storage.set("interval", interval)
+        Storage.set("level", level)
+        if (!loadMenuItem.visible)
+            loadMenuItem.visible = true
+    }
+
+    function loadGame() {
+        for (var i = 15; i > 0; i--)
+            for (var j = 1; j < 11; j++) {
+                var index = i*12+j
+                repeater.itemAt(index).active = Storage.get("Dot["+index+"].active",repeater.itemAt(index).active)
+                repeater.itemAt(index).opacity = Storage.get("Dot["+index+"].opacity",repeater.itemAt(index).opacity)
+                repeater.itemAt(index).color = Storage.get("Dot["+index+"].color",repeater.itemAt(index).color)
+                console.log("Loading"+index)
+            }
+        activeColor = Storage.get("activeColor", activeColor)
+        centerX = Storage.get("centerX", centerX)
+        centerY = Storage.get("centerY", centerY)
+        activeBlock = Storage.get("activeBlock", activeBlock)
+        futureBlock = Storage.get("futureBlock", futureBlock)
+        switch (futureBlock) {
+        case 0 :
+            future_l_normal()
+            break
+        case 1 :
+            future_l_reverse()
+            break
+        case 2 :
+            future_s_normal()
+            break
+        case 3 :
+            future_s_reverse()
+            break
+        case 4 :
+            future_t_normal()
+            break
+        case 5 :
+            future_square()
+            break
+        case 6 :
+            future_line()
+            break
+        }
+        scoreValue = Storage.get("scoreValue", scoreValue)
+        speedValue = Storage.get("speedValue", speedValue)
+        interval = Storage.get("interval", interval)
+        level = Storage.get("level", level)
+
+        pauseMenuItem.visible = true
     }
 
     // Tetraminos Active: ok!
@@ -460,6 +526,11 @@ Item {
         mouseArea.enabled = false
         pauseMenuItem.visible = false
         downTimer.running = false
+        if (scoreValue > Storage.get("highscore", highscoreValue)) {
+            Storage.set("highscore", scoreValue)
+            highscoreValue = scoreValue
+        }
+        scoreValue -= 1
         console.log("Game Over")
     }
 

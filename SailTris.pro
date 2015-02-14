@@ -28,7 +28,8 @@ OTHER_FILES += qml/SailTris.qml \
     rpm/SailTris.changes \
     Donation.png \
     SailTris.desktop \
-    i18n/translation_it_IT.ts
+    i18n/translation_it_IT.ts \
+    qml/storage.js
 
 
 

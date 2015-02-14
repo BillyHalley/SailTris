@@ -9,16 +9,19 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import QtQuick.LocalStorage 2.0
+import "../storage.js" as Storage
 import ".."
+
 
 Page {
     id: page
-
     property int scoreValue
     property int speedValue
     property int interval
     property int level
-
+    property int highscoreValue: Storage.get("highscore", highscoreValue) === 0 ? 0 : Storage.get("highscore", highscoreValue)
+    property int savedGame: Storage.get("savedGame", savedGame) === 0 ? 0 : Storage.get("savedGame", savedGame)
     property int activeBlock
     property int futureBlock: -1
 
@@ -33,8 +36,6 @@ Page {
     property real centerX
     property real centerY
 
-    property real futureCenterX
-    property real futureCenterY
 
     Functions {
         id: functions
@@ -57,11 +58,11 @@ Page {
         anchors.fill: parent
         PullDownMenu {
             id: pullDownMenu
+            //RemorsePopup { id: remorse }
             MenuItem {
                 text: qsTr("About Page")
                 onClicked: pageStack.push("About.qml")
             }
-
             MenuItem {
                 text: qsTr("New Game")
                 onClicked: functions.newGame()
@@ -83,6 +84,18 @@ Page {
 
             }
             MenuItem {
+                id: loadMenuItem
+                onClicked: functions.loadGame()
+                text: qsTr("Load Game")
+                visible: savedGame === 1 ? true : false
+            }
+            MenuItem {
+                id:saveMenuItem
+                text: qsTr("Save Game")
+                onClicked: functions.saveGame()
+                visible: pauseMenuItem.visible
+            }
+            MenuItem {
                 id: pauseMenuItem
                 text: qsTr("Unpause")
                 onClicked: functions.pause()
@@ -90,9 +103,57 @@ Page {
             }
         }
 
+        Item {
+            id: savingPage
+            anchors.fill: parent
+            visible: false
+            z: 1
+            property int progress
+            property int total: 204
+
+            Timer {
+                id: savingTimer
+                interval: 1
+                running: false
+                repeat: true
+                property int index: 0
+                onTriggered: {
+                    if (index === 204) {
+                        stop()
+                        savingPage.visible = false
+                        pullDownMenu.enabled = true
+                        root.interactive = true
+                    }  else {
+                        console.log("saving " + index)
+                        Storage.set("Dot["+index+"].active",repeater.itemAt(index).active)
+                        Storage.set("Dot["+index+"].opacity",repeater.itemAt(index).opacity)
+                        Storage.set("Dot["+index+"].color",repeater.itemAt(index).color)
+                        index += 1
+                        savingPage.progress += 1
+                    }
+                }
+            }
+
+            Rectangle {
+                anchors.fill: parent
+                color: "black"
+                opacity: 0.7
+            }
+            ProgressBar {
+                minimumValue: 0
+                maximumValue: savingPage.total
+                value: savingPage.progress
+                width: savingPage.width
+                anchors.verticalCenter: savingPage.verticalCenter
+                anchors.horizontalCenter: savingPage.horizontalCenter
+                label: qsTr("Saving...")
+            }
+
+        }
+
         Label {
             id: score
-            text:  qsTr("Level: ") + level + "\n" + qsTr("Score: ") + scoreValue
+            text:  qsTr("Level ") + "\n" + qsTr("Score ")  + "\n" + qsTr("Highscore ")
             anchors {
                 top: parent.top
                 left: parent.left
@@ -100,6 +161,15 @@ Page {
                 leftMargin: Theme.paddingLarge
             }
         }
+        Label {
+            id: scoreValues
+            text:  level + "\n" + scoreValue + "\n" + highscoreValue
+            anchors {
+                left: score.right
+                verticalCenter: score.verticalCenter
+            }
+        }
+
         Label {
             id: debugLabel
             opacity: 0

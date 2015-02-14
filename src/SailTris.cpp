@@ -31,7 +31,7 @@
 //#ifdef QT_QML_DEBUG
 #include <QtQuick>
 //#endif
-
+#include <QFile>
 #include <sailfishapp.h>
 
 int main(int argc, char *argv[])

@@ -30,12 +30,12 @@ Every 1000 point you proceed to the next level, and the speed is increased!</sou
 Ogni 1000 punti accedi al livello successivo, e la velocità di gioco aumenta!</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="58"/>
+        <location filename="../qml/pages/About.qml" line="53"/>
         <source>Follow the developement on </source>
         <translation type="unfinished">Segui lo sviluppo su </translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="58"/>
+        <location filename="../qml/pages/About.qml" line="53"/>
         <source> and check Wharehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic to donate :)</source>
         <translation type="unfinished"> e controlla Wharehouse per gli aggiornamenti. Questa app è completamente sviluppata da BillyHalley, se ti piace prendi in considerazione l&apos;idea di fare una piccola donazione, lo apprezzerei molto! Clicca sull&apos;immagine per donare :)</translation>
     </message>
@@ -79,37 +79,57 @@ Ogni 1000 punti accedi al livello successivo, e la velocità di gioco aumenta!</
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="61"/>
+        <location filename="../qml/pages/FirstPage.qml" line="63"/>
         <source>About Page</source>
         <translation type="unfinished">Crediti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="66"/>
+        <location filename="../qml/pages/FirstPage.qml" line="67"/>
         <source>New Game</source>
         <translation type="unfinished">Nuovo Gioco</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="70"/>
+        <location filename="../qml/pages/FirstPage.qml" line="71"/>
         <source>Debug Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="87"/>
+        <location filename="../qml/pages/FirstPage.qml" line="89"/>
+        <source>Load Game</source>
+        <translation type="unfinished">Carica Partita</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="94"/>
+        <source>Save Game</source>
+        <translation type="unfinished">Salva Partita</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="100"/>
         <source>Unpause</source>
         <translation type="unfinished">Riprendi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="95"/>
-        <source>Level: </source>
-        <translation type="unfinished">Livello: </translation>
+        <location filename="../qml/pages/FirstPage.qml" line="149"/>
+        <source>Saving...</source>
+        <translation type="unfinished">Salvataggio...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="95"/>
-        <source>Score: </source>
-        <translation type="unfinished">Punteggio: </translation>
+        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <source>Level </source>
+        <translation type="unfinished">Livello </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="121"/>
+        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <source>Score </source>
+        <translation type="unfinished">Punteggio </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <source>Highscore </source>
+        <translation type="unfinished">Record </translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="191"/>
         <source>Next</source>
         <translation type="unfinished">Successivo</translation>
     </message>
