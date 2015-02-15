@@ -15,7 +15,7 @@ Item {
         pullDownMenu.enabled = false
         root.interactive = false
         mouseArea.enabled = true
-        pauseMenuItem.visible = false
+        pushUpMenu.enabled = false
         downTimer.running = true
 
         // Empty grids
@@ -40,7 +40,6 @@ Item {
         level = 1
         scoreValue = 0
         speedValue = 0
-        interval = 1000
 
         // Calls generate()
 
@@ -51,16 +50,21 @@ Item {
 
     function pause() {
         pullDownMenu.enabled = !pullDownMenu.enabled
+        pushUpMenu.enabled = !pushUpMenu.enabled
         root.interactive = !root.interactive
         mouseArea.enabled = !mouseArea.enabled
-        pauseMenuItem.visible = !pauseMenuItem.visible
         downTimer.running = !downTimer.running
+    }
+
+    function setDifficulty() {
+
     }
 
     function saveGame() {
         savingPage.visible = true
         savingTimer.running = true
         pullDownMenu.enabled = false
+        pushUpMenu.enabled = false
         root.interactive = false
         Storage.set("savedGame", 1)
         Storage.set("activeColor", activeColor)
@@ -71,10 +75,8 @@ Item {
         Storage.set("futureBlock", futureBlock)
         Storage.set("scoreValue", scoreValue)
         Storage.set("speedValue", speedValue)
-        Storage.set("interval", interval)
         Storage.set("level", level)
-        if (!loadMenuItem.visible)
-            loadMenuItem.visible = true
+        savedGame = 1
     }
 
     function loadGame() {
@@ -116,10 +118,9 @@ Item {
         }
         scoreValue = Storage.get("scoreValue", scoreValue)
         speedValue = Storage.get("speedValue", speedValue)
-        interval = Storage.get("interval", interval)
         level = Storage.get("level", level)
-
-        pauseMenuItem.visible = true
+        pushUpMenu.enabled= true
+        pause()
     }
 
     // Tetraminos Active: ok!
@@ -522,9 +523,9 @@ Item {
 
     function gameOver() {
         pullDownMenu.enabled = true
+        pushUpMenu.enabled = false
         root.interactive = true
         mouseArea.enabled = false
-        pauseMenuItem.visible = false
         downTimer.running = false
         if (scoreValue > Storage.get("highscore", highscoreValue)) {
             Storage.set("highscore", scoreValue)
@@ -669,8 +670,8 @@ Item {
 
         if ( speedValue > 1000){
             speedValue = 0
-            interval -= interval*0.1
             level += 1
+            console.log("Timer set: " + downTimer.interval)
         }
 
         for (var k = 0; k < lines.length; k++) {

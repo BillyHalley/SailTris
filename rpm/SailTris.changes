@@ -8,7 +8,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.4-2
+* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.5-1
+- v0.5-1:
+-- Added 3 different difficulty levels
+-- Changed difficulty algorithm, now speed increase faster with levels
+-- Added options to change between dots and squares
+-- Added PushUpMenu to Save and Resume game
+-- KNOWN BUG: PushUpMenu is infinite (?)
+
 - v0.4-2:
 -- Fixed about page
 -- Changed T tetramino center

@@ -16,9 +16,10 @@ import ".."
 
 Page {
     id: page
+    property bool dots: true
     property int scoreValue
     property int speedValue
-    property int interval
+    property real difficulty: 1 // 0.5 = Hard, 1 = Normal, 2 = Easy
     property int level
     property int highscoreValue: Storage.get("highscore", highscoreValue) === 0 ? 0 : Storage.get("highscore", highscoreValue)
     property int savedGame: Storage.get("savedGame", savedGame) === 0 ? 0 : Storage.get("savedGame", savedGame)
@@ -42,7 +43,7 @@ Page {
     }
     Timer {
         id: downTimer
-        interval: interval
+        interval: difficulty*1338*Math.pow(Math.E,-0.26*level)
         repeat: true
         running: false
         onTriggered: {
@@ -55,37 +56,57 @@ Page {
 
     SilicaFlickable {
         id: root
-        anchors.fill: parent
-        PullDownMenu {
-            id: pullDownMenu
-            //RemorsePopup { id: remorse }
+        anchors.fill: page
+        //height: page.height
+        PushUpMenu {
+            id:pushUpMenu
             MenuItem {
-                text: qsTr("About Page")
-                onClicked: pageStack.push("About.qml")
-            }
-            MenuItem {
-                text: qsTr("New Game")
-                onClicked: functions.newGame()
-            }
-
-            MenuItem {
-                id: loadMenuItem
-                onClicked: functions.loadGame()
-                text: qsTr("Load Game")
-                visible: savedGame === 1 ? true : false
+                id: pauseMenuItem
+                text: qsTr("Resume")
+                onClicked: functions.pause()
             }
             MenuItem {
                 id:saveMenuItem
                 text: qsTr("Save Game")
                 onClicked: functions.saveGame()
-                visible: pauseMenuItem.visible
+            }
+            enabled: false
+        }
+
+        PullDownMenu {
+            id: pullDownMenu
+            MenuItem {
+                text: qsTr("About Page")
+                onClicked: pageStack.push("About.qml")
             }
             MenuItem {
-                id: pauseMenuItem
-                text: qsTr("Unpause")
-                onClicked: functions.pause()
-                visible: false
+                property string type: dots ? qsTr("Dots") : qsTr("Squares")
+                text: qsTr("Block Type: ") + type
+                onClicked: dots = !dots
             }
+
+            MenuItem {
+                property string diff: difficulty === 0.5 ? qsTr("Hard") : difficulty === 1 ? qsTr("Normal") : qsTr("Easy")
+                text: qsTr("Difficulty: ") + diff
+                onClicked: {
+                    if ( difficulty === 2 )
+                        difficulty = 1
+                    else if ( difficulty === 1 )
+                        difficulty = 0.5
+                    else if ( difficulty === 0.5)
+                        difficulty = 2
+                }
+            }
+            MenuItem {
+                text: qsTr("New Game")
+                onClicked: functions.newGame()
+            }
+            MenuItem {
+                id: loadMenuItem
+                onClicked: savedGame === 1 ? functions.loadGame() : savedGame +=0
+                text: savedGame === 1 ? qsTr("Load Game") : qsTr("No Game to Load")
+            }
+
         }
 
         Item {
@@ -107,6 +128,7 @@ Page {
                         stop()
                         savingPage.visible = false
                         pullDownMenu.enabled = true
+                        pushUpMenu.enabled = true
                         root.interactive = true
                     }  else {
                         console.log("saving " + index)
@@ -140,9 +162,9 @@ Page {
             id: score
             text:  qsTr("Level ") + "\n" + qsTr("Score ")  + "\n" + qsTr("Highscore ")
             anchors {
-                top: parent.top
+                bottom: futureGrid.bottom
                 left: parent.left
-                topMargin: Theme.paddingLarge
+
                 leftMargin: Theme.paddingLarge
             }
         }
@@ -170,7 +192,7 @@ Page {
             anchors {
                 top: parent.top
                 right: parent.right
-                topMargin: Theme.paddingLarge*2.5
+                topMargin: Theme.paddingLarge*2
                 rightMargin: Theme.paddingLarge
             }
             columns: 4
@@ -206,8 +228,8 @@ Page {
             width: grid.width
             height: grid.height
             anchors {
-                top: parent.top
-                topMargin: Theme.paddingLarge * 8
+                bottom: parent.bottom
+                bottomMargin: Theme.paddingMedium
             }
             border.color: "transparent"
             color: "transparent"
