@@ -67,22 +67,7 @@ Page {
                 text: qsTr("New Game")
                 onClicked: functions.newGame()
             }
-            MenuItem {
-                text: qsTr("Debug Settings")
-                onClicked: {
-                    var dialog = pageStack.push("DebugSettings.qml")
-                    dialog.accepted.connect(function() {
-                        interval = dialog.timerValue
-                        values.opacity = dialog.gridOpacity
-                        rect.color = dialog.gridOpacity ? Theme.secondaryColor : "transparent"
-                        debugLabel.opacity = dialog.gridOpacity
-                        visible = dialog.gridOpacity ? true : false
-                        consoleLabel.opacity = dialog.gridOpacity
-                    })
-                }
-                visible: false
 
-            }
             MenuItem {
                 id: loadMenuItem
                 onClicked: functions.loadGame()
@@ -171,18 +156,6 @@ Page {
         }
 
         Label {
-            id: debugLabel
-            opacity: 0
-            anchors {
-                top: score.bottom
-                left: parent.left
-                topMargin: Theme.paddingLarge
-                leftMargin: Theme.paddingLarge
-            }
-            text: "Interval: " + interval + " Active: " + activeBlock + " Future: " + futureBlock
-        }
-
-        Label {
             id: next
             anchors {
                 bottom: futureGrid.top
@@ -225,24 +198,6 @@ Page {
                             itemAt(index).color = Theme.highlightColor
                             itemAt(index).opacity = 1
                         }
-                    }
-                }
-            }
-            // Debug grid
-            Grid {
-                id: values
-                columns: 12
-                rows: 17
-                opacity: 0
-                Repeater {
-                    model: 204
-                    delegate: Label {
-                        width: page.width/12;
-                        height: width;
-                        text: index;
-                        opacity: 0.25;
-                        horizontalAlignment: Text.AlignHCenter;
-                        verticalAlignment: Text.AlignVCenter
                     }
                 }
             }

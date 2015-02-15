@@ -36,8 +36,8 @@ Ogni 1000 punti accedi al livello successivo, e la velocità di gioco aumenta!</
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="53"/>
-        <source> and check Wharehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic to donate :)</source>
-        <translation type="unfinished"> e controlla Wharehouse per gli aggiornamenti. Questa app è completamente sviluppata da BillyHalley, se ti piace prendi in considerazione l&apos;idea di fare una piccola donazione, lo apprezzerei molto! Clicca sull&apos;immagine per donare :)</translation>
+        <source> and check Warehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, I would really appreciate! Click on the pic to donate :)</source>
+        <translation type="unfinished"> e controlla Warehouse per gli aggiornamenti. Questa app è completamente sviluppata da BillyHalley, se ti piace prendi in considerazione l&apos;idea di fare una piccola donazione, lo apprezzerei molto! Clicca sull&apos;immagine per donare :)</translation>
     </message>
 </context>
 <context>
@@ -46,34 +46,6 @@ Ogni 1000 punti accedi al livello successivo, e la velocità di gioco aumenta!</
         <location filename="../qml/cover/CoverPage.qml" line="38"/>
         <source>SailTris</source>
         <translation type="unfinished">SailTris</translation>
-    </message>
-</context>
-<context>
-    <name>DebugSettings</name>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="46"/>
-        <source>Debug Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="56"/>
-        <source> Seconds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="57"/>
-        <source>Timer Interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="65"/>
-        <source>Enables Debug Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="66"/>
-        <source>Shows grid numbers, speed values and MouseArea in green.</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -89,47 +61,42 @@ Ogni 1000 punti accedi al livello successivo, e la velocità di gioco aumenta!</
         <translation type="unfinished">Nuovo Gioco</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="71"/>
-        <source>Debug Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="89"/>
+        <location filename="../qml/pages/FirstPage.qml" line="74"/>
         <source>Load Game</source>
         <translation type="unfinished">Carica Partita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="94"/>
+        <location filename="../qml/pages/FirstPage.qml" line="79"/>
         <source>Save Game</source>
         <translation type="unfinished">Salva Partita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="100"/>
+        <location filename="../qml/pages/FirstPage.qml" line="85"/>
         <source>Unpause</source>
         <translation type="unfinished">Riprendi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="149"/>
+        <location filename="../qml/pages/FirstPage.qml" line="134"/>
         <source>Saving...</source>
         <translation type="unfinished">Salvataggio...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="141"/>
         <source>Level </source>
         <translation type="unfinished">Livello </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="141"/>
         <source>Score </source>
         <translation type="unfinished">Punteggio </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="141"/>
         <source>Highscore </source>
         <translation type="unfinished">Record </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="191"/>
+        <location filename="../qml/pages/FirstPage.qml" line="164"/>
         <source>Next</source>
         <translation type="unfinished">Successivo</translation>
     </message>

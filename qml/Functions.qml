@@ -175,7 +175,7 @@ Item {
     function t_normal()  { // 4 index = [17,29,30,41]
         console.log("called t_normal()")
         var index = [17,29,30,41]
-        centerX = 6
+        centerX = 5
         centerY = 2
         activeColor = "blue"
         for ( var i = 0; i < 4; i++) {

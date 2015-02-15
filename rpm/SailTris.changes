@@ -8,7 +8,11 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Fri Feb 13 2014 Billy Halley <ziobilly94@gmail.com> 0.4-1
+* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.4-2
+- v0.4-2:
+-- Fixed about page
+-- Changed T tetramino center
+
 - v0.4-1 :
 -- WARNING: This update may delete your highscore, but it is mandatory
 -- Added Save/Load game

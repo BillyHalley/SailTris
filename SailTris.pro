@@ -19,7 +19,6 @@ SOURCES += src/SailTris.cpp
 OTHER_FILES += qml/SailTris.qml \
     qml/cover/CoverPage.qml \
     qml/pages/FirstPage.qml \
-    qml/pages/DebugSettings.qml \
     qml/pages/About.qml \
     qml/Dot.qml \
     qml/Functions.qml \

@@ -6,7 +6,7 @@ Page {
     SilicaFlickable {
         id: flickable
         anchors.fill: page
-        contentHeight: item.height
+        contentHeight: column.height
         Column {
             id: column
             width: parent.width - Theme.paddingLarge*2
@@ -45,24 +45,37 @@ Page {
             }
 
             Row {
-                spacing: Theme.paddingMedium
+                spacing: Theme.paddingLarge
                 Label {
                     id: imageText
                     width: column.width/2 - Theme.paddingMedium
                     textFormat: Text.RichText
-                    text: "<style>a:link { color: " + Theme.highlightColor + "; }</style>" + qsTr("Follow the developement on ") + "<a href=https://openrepos.net/content/billyhalley/sailtris>OpenRepos.net</a>" + qsTr(" and check Wharehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic to donate :)")
+                    text: "<style>a:link { color: " + Theme.highlightColor + "; }</style>" + qsTr("Follow the developement on ") + "<a href=https://openrepos.net/content/billyhalley/sailtris>OpenRepos.net</a>" + qsTr(" and check Warehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, I would really appreciate! Click on the pic to donate :)")
                     color: Theme.secondaryColor
                     font.pixelSize: Theme.fontSizeSmall - 6
                     horizontalAlignment: Text.AlignJustify
                     wrapMode: Text.WordWrap
                     onLinkActivated: Qt.openUrlExternally("https://openrepos.net/content/billyhalley/sailtris")
                 }
-                Image {
-                    id: image
+                Item {
                     height: imageText.height
                     width: imageText.width
-                    fillMode: Image.PreserveAspectFit
-                    source: "Donation.png"
+                    Image {
+                        id: image
+                        height: imageText.height
+                        width: imageText.width
+                        fillMode: Image.PreserveAspectFit
+                        source: "Donation.png"
+                    }
+                    MouseArea {
+                        width: image.width
+                        height: image.height
+                        anchors.fill: image
+                        onClicked: {
+                            console.log("Image Clicked")
+                            Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VKAXABNCGPHM6")
+                        }
+                    }
                 }
             }
 
@@ -71,14 +84,5 @@ Page {
         VerticalScrollDecorator {flickable: flickable }
 
     }
-    MouseArea {
-        width: image.width
-        height: image.height
-        x: image.x
-        y: image.y
-        onClicked: {
-            console.log("Image Clicked")
-            Qt.openUrlExternally("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=VKAXABNCGPHM6")
-        }
-    }
+
 }
