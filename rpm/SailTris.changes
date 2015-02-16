@@ -8,7 +8,22 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.5-1
+* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.5-2
+- v0.5-2 :
+-- WARNING: This update may delete your highscore and saved game, but it is mandatory
+-- Now there are 5 different difficulty levels and defficulty is showed on screen
+-- Different Highscore for each difficulty level
+-- Speed algorithm changed a little bit (previously interval tended to 0, so it got pretty difficult very fast, now we have a limit for each difficulty level
+-- Settings are now stored
+-- Fixed About Page in English and Italian
+-- BugFix: PushUpMenu works fine
+-- KNOWN BUG: (Which have to be fixed)
+-- - Sometimes lines aren't cleared as expected
+-- Issues: (Don't know if are real bugs, can't reproduce)
+-- - Highscore may result as undefined, maybe only the first time
+-- - Once i wasn't able to save, maybe not a real problem
+-- To Do: Instantaneous drop, Transifex translations
+
 - v0.5-1:
 -- Added 3 different difficulty levels
 -- Changed difficulty algorithm, now speed increase faster with levels
@@ -16,26 +31,26 @@
 -- Added PushUpMenu to Save and Resume game
 -- KNOWN BUG: PushUpMenu is infinite (?)
 
-- v0.4-2:
--- Fixed about page
--- Changed T tetramino center
+#- v0.4-2:
+#-- Fixed about page
+#-- Changed T tetramino center
 
-- v0.4-1 :
--- WARNING: This update may delete your highscore, but it is mandatory
--- Added Save/Load game
+#- v0.4-1 :
+#-- WARNING: This update may delete your highscore, but it is mandatory
+#-- Added Save/Load game
 
-- v0.3-1 :
--- Added local Highscore
+#- v0.3-1 :
+#-- Added local Highscore
 
-- v0.2-2 :
--- Included Italian translation
--- Re-organized game page
+#- v0.2-2 :
+#-- Included Italian translation
+#-- Re-organized game page
 
 - v0.2-1 :
--- Fixed About Page with links
--- Increased sensibility for fast consecutive swipes
--- Changed score system and added Levels
--- Next Block is now previously displayed
+#-- Fixed About Page with links
+#-- Increased sensibility for fast consecutive swipes
+#-- Changed score system and added Levels
+#-- Next Block is now previously displayed
 
 #- v0.1-4 :
 #-- Fixed Pause, it's late, i should go to sleep before posting apps...

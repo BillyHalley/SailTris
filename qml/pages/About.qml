@@ -29,7 +29,7 @@ Page {
             }
             Label {
                 width: parent.width
-                text: qsTr("To play select 'New Game' in pulley menu!\nSwipe Left, Right or Down to move the block, click on the screen to Rotate it.\nSwipe Up to Pause the Game, to resume Pull Down to show the Pulley Menu")
+                text: qsTr("To play select 'New Game' in pulley menu!\nSwipe Left, Right or Down to move the block, click on the screen to Rotate it.\nSwipe Up to Pause the Game, to resume Swipe Up to show the Pulley Menu")
                 color: Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 horizontalAlignment: Text.AlignJustify

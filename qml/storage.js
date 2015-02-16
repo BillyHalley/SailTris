@@ -1,5 +1,5 @@
 function getDatabase() {
-     return LocalStorage.openDatabaseSync("SailTris", "0.1", "Database", 1000);
+     return LocalStorage.openDatabaseSync("SailTris", "0.1", "Database", 10000);
 }
 
 function set(setting, value) {
@@ -18,21 +18,18 @@ function set(setting, value) {
   return res;
 }
 
-function get(setting, default_value) {
-   var db = getDatabase();
-   var res="";
-   try {
-       db.transaction(function(tx) {
-         var rs = tx.executeSql('SELECT value FROM settings WHERE setting=?;', [setting]);
-         if (rs.rows.length > 0) {
-              res = rs.rows.item(0).value;
-         } else {
-             res = default_value;
-         }
-      })
-   } catch (err) {
-       //console.log("Database " + err);
-       res = default_value;
-   };
-  return res
+function get(setting) {
+    var db = getDatabase();
+    var res="";
+    db.transaction(function(tx) {
+      var rs = tx.executeSql('SELECT value FROM settings WHERE setting=?;', [setting]);
+      if (rs.rows.length > 0) {
+           res = rs.rows.item(0).value;
+      } else {
+          res = 0;
+      }
+   })
+   // The function returns “Unknown” if the setting was not found in the database
+   // For more advanced projects, this should probably be handled through error codes
+   return res
 }

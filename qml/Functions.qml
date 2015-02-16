@@ -56,9 +56,6 @@ Item {
         downTimer.running = !downTimer.running
     }
 
-    function setDifficulty() {
-
-    }
 
     function saveGame() {
         savingPage.visible = true
@@ -76,6 +73,7 @@ Item {
         Storage.set("scoreValue", scoreValue)
         Storage.set("speedValue", speedValue)
         Storage.set("level", level)
+        Storage.set("savedDifficulty", difficulty)
         savedGame = 1
     }
 
@@ -83,16 +81,16 @@ Item {
         for (var i = 15; i > 0; i--)
             for (var j = 1; j < 11; j++) {
                 var index = i*12+j
-                repeater.itemAt(index).active = Storage.get("Dot["+index+"].active",repeater.itemAt(index).active)
-                repeater.itemAt(index).opacity = Storage.get("Dot["+index+"].opacity",repeater.itemAt(index).opacity)
-                repeater.itemAt(index).color = Storage.get("Dot["+index+"].color",repeater.itemAt(index).color)
+                repeater.itemAt(index).active = Storage.get("Dot["+index+"].active")
+                repeater.itemAt(index).opacity = Storage.get("Dot["+index+"].opacity")
+                repeater.itemAt(index).color = Storage.get("Dot["+index+"].color")
                 console.log("Loading"+index)
             }
-        activeColor = Storage.get("activeColor", activeColor)
-        centerX = Storage.get("centerX", centerX)
-        centerY = Storage.get("centerY", centerY)
-        activeBlock = Storage.get("activeBlock", activeBlock)
-        futureBlock = Storage.get("futureBlock", futureBlock)
+        activeColor = Storage.get("activeColor")
+        centerX = Storage.get("centerX")
+        centerY = Storage.get("centerY")
+        activeBlock = Storage.get("activeBlock")
+        futureBlock = Storage.get("futureBlock")
         switch (futureBlock) {
         case 0 :
             future_l_normal()
@@ -116,11 +114,11 @@ Item {
             future_line()
             break
         }
-        scoreValue = Storage.get("scoreValue", scoreValue)
-        speedValue = Storage.get("speedValue", speedValue)
-        level = Storage.get("level", level)
+        scoreValue = Storage.get("scoreValue")
+        speedValue = Storage.get("speedValue")
+        level = Storage.get("level")
+        difficulty = Storage.get("savedDifficulty")
         pushUpMenu.enabled= true
-        pause()
     }
 
     // Tetraminos Active: ok!
@@ -522,22 +520,39 @@ Item {
     // Game over: ok!
 
     function gameOver() {
+        var index = difficulty
         pullDownMenu.enabled = true
         pushUpMenu.enabled = false
         root.interactive = true
         mouseArea.enabled = false
         downTimer.running = false
-        if (scoreValue > Storage.get("highscore", highscoreValue)) {
-            Storage.set("highscore", scoreValue)
+        if (scoreValue > highscoreValue) {
+            Storage.set("highscore["+index+"]", scoreValue)
             highscoreValue = scoreValue
         }
         scoreValue -= 1
         console.log("Game Over")
     }
 
+    function setDifficulty() {
+        if ( difficulty === 2 )
+            difficulty = 1.5
+        else if ( difficulty === 1.5 )
+            difficulty = 1
+        else if ( difficulty === 1 )
+            difficulty = 0.75
+        else if ( difficulty === 0.75 )
+            difficulty = 0.5
+        else if ( difficulty === 0.5 )
+            difficulty = 2
+        highscoreValue = Storage.get("highscore["+difficulty+"]")
+        Storage.set("difficulty", difficulty)
+    }
+
     // Down Flow Traslation: ok!
 
     function flow() {
+        console.log("Flow")
         var down = 1
         for (var i = 190; i > 12; i-- )
             if (repeater.itemAt(i).active === 1 && repeater.itemAt(i+12).active > 1)
@@ -663,16 +678,19 @@ Item {
                 score += 100*lines.length
         }
 
+        score = score
         scoreValue += score
         speedValue += score
 
-        // Increase speed
+        // Increase Level
 
         if ( speedValue > 1000){
             speedValue = 0
             level += 1
             console.log("Timer set: " + downTimer.interval)
         }
+
+        // Da rivedere
 
         for (var k = 0; k < lines.length; k++) {
             for ( i = lines[0]; i > 0; i--) {

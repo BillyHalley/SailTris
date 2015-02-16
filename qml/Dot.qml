@@ -9,7 +9,7 @@ GlassItem {
     id: dot
     width: Theme.paddingLarge*2
     height: width
-    radius: page.dots ? 0.2 : 0
-    falloffRadius: page.dots ? 0.25 : 2
+    radius: page.dots === 0 ? 0.2 : 0
+    falloffRadius: page.dots === 0 ? 0.25 : 2
     color: color
 }

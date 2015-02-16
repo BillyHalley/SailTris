@@ -16,15 +16,15 @@ import ".."
 
 Page {
     id: page
-    property bool dots: true
+    property int dots: Storage.get("dots") // 0 = dots; else = squares
     property int scoreValue
     property int speedValue
-    property real difficulty: 1 // 0.5 = Hard, 1 = Normal, 2 = Easy
+    property real difficulty: Storage.get("difficulty") === 0 ? 1 : Storage.get("difficulty")
     property int level
-    property int highscoreValue: Storage.get("highscore", highscoreValue) === 0 ? 0 : Storage.get("highscore", highscoreValue)
-    property int savedGame: Storage.get("savedGame", savedGame) === 0 ? 0 : Storage.get("savedGame", savedGame)
+    property variant highscoreValue: Storage.get("highscore["+difficulty+"]")
     property int activeBlock
     property int futureBlock: -1
+    property int savedGame: Storage.get("savedGame")
 
     // 0 = l_normal; 1 = l_reverse;
     // 2 = s_normal; 3 = s_reverse;
@@ -37,27 +37,26 @@ Page {
     property real centerX
     property real centerY
 
-
     Functions {
         id: functions
     }
+
     Timer {
         id: downTimer
-        interval: difficulty*1338*Math.pow(Math.E,-0.26*level)
+        interval: difficulty*(1338*Math.pow(Math.E,-0.26*level)+150)
         repeat: true
         running: false
         onTriggered: {
             functions.flow()
             scoreValue += 1
             speedValue += 1
-            console.log("Flow")
         }
     }
 
     SilicaFlickable {
         id: root
         anchors.fill: page
-        //height: page.height
+        contentHeight : height
         PushUpMenu {
             id:pushUpMenu
             MenuItem {
@@ -80,22 +79,24 @@ Page {
                 onClicked: pageStack.push("About.qml")
             }
             MenuItem {
-                property string type: dots ? qsTr("Dots") : qsTr("Squares")
+                property string type: dots === 0 ? qsTr("Dots") : qsTr("Squares")
                 text: qsTr("Block Type: ") + type
-                onClicked: dots = !dots
-            }
-
-            MenuItem {
-                property string diff: difficulty === 0.5 ? qsTr("Hard") : difficulty === 1 ? qsTr("Normal") : qsTr("Easy")
-                text: qsTr("Difficulty: ") + diff
                 onClicked: {
-                    if ( difficulty === 2 )
-                        difficulty = 1
-                    else if ( difficulty === 1 )
-                        difficulty = 0.5
-                    else if ( difficulty === 0.5)
-                        difficulty = 2
+                    if (dots === 0) {
+                        dots = 1
+                        Storage.set("dots", 1)
+                    }
+                    else {
+                        dots = 0
+                        Storage.set("dots", 0)
+                    }
                 }
+            }
+            MenuItem {
+                id: diffItem
+                property string diff: difficulty === 0.5 ? qsTr("Very Hard") : difficulty === 0.75 ? qsTr("Hard") : difficulty === 1 ? qsTr("Normal") : difficulty === 1.5 ? qsTr("Easy") : qsTr("Very Easy")
+                text: qsTr("Difficulty: ") + diff
+                onClicked: functions.setDifficulty()
             }
             MenuItem {
                 text: qsTr("New Game")
@@ -160,7 +161,7 @@ Page {
 
         Label {
             id: score
-            text:  qsTr("Level ") + "\n" + qsTr("Score ")  + "\n" + qsTr("Highscore ")
+            text:  diffItem.diff + " \n" + qsTr("Level ") + "\n" + qsTr("Score ")  + "\n" + qsTr("Highscore ")
             anchors {
                 bottom: futureGrid.bottom
                 left: parent.left
@@ -173,7 +174,7 @@ Page {
             text:  level + "\n" + scoreValue + "\n" + highscoreValue
             anchors {
                 left: score.right
-                verticalCenter: score.verticalCenter
+                bottom: score.bottom
             }
         }
 

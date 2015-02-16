@@ -17,10 +17,10 @@
         <location filename="../qml/pages/About.qml" line="32"/>
         <source>To play select &apos;New Game&apos; in pulley menu!
 Swipe Left, Right or Down to move the block, click on the screen to Rotate it.
-Swipe Up to Pause the Game, to resume Pull Down to show the Pulley Menu</source>
+Swipe Up to Pause the Game, to resume Swipe Up to show the Pulley Menu</source>
         <translation type="unfinished">Per giocare, seleziona &apos;Nuovo Gioco&apos; nel Pulley Menu!
 Scorri a Sinistra, Destra o in basso per muovere il blocco, clicca sullo schermo per ruotarlo!
-Scorri verso l&apos;alto per mettere in pausa, per riprendere Scorri verso il basso per mostrare il Pulley Menu!</translation>
+Scorri verso l&apos;alto per mettere in pausa, per riprendere Scorri verso l&apos;alto per mostrare il Pulley Menu!</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="40"/>
@@ -51,92 +51,102 @@ Ogni 1000 punti accedi al livello successivo, e la velocità di gioco aumenta!</
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="79"/>
+        <location filename="../qml/pages/FirstPage.qml" line="78"/>
         <source>About Page</source>
         <translation type="unfinished">Crediti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="101"/>
+        <location filename="../qml/pages/FirstPage.qml" line="102"/>
         <source>New Game</source>
         <translation type="unfinished">Nuovo Gioco</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="107"/>
+        <location filename="../qml/pages/FirstPage.qml" line="108"/>
         <source>Load Game</source>
         <translation type="unfinished">Carica Partita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="70"/>
+        <location filename="../qml/pages/FirstPage.qml" line="69"/>
         <source>Save Game</source>
         <translation type="unfinished">Salva Partita</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="65"/>
+        <location filename="../qml/pages/FirstPage.qml" line="64"/>
         <source>Resume</source>
         <translation type="unfinished">Riprendi</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="83"/>
+        <location filename="../qml/pages/FirstPage.qml" line="82"/>
         <source>Dots</source>
         <translation type="unfinished">Punti</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="83"/>
+        <location filename="../qml/pages/FirstPage.qml" line="82"/>
         <source>Squares</source>
         <translation type="unfinished">Quadrati</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="84"/>
+        <location filename="../qml/pages/FirstPage.qml" line="83"/>
         <source>Block Type: </source>
         <translation type="unfinished">Tipo di Blocchi: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="89"/>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
         <source>Hard</source>
         <translation type="unfinished">Difficile</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="89"/>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
         <source>Normal</source>
         <translation type="unfinished">Normale</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="89"/>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
         <source>Easy</source>
         <translation type="unfinished">Facile</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="90"/>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
+        <source>Very Hard</source>
+        <translation type="unfinished">Molto Difficile</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
+        <source>Very Easy</source>
+        <translation type="unfinished">Molto Facile</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="98"/>
         <source>Difficulty: </source>
         <translation type="unfinished">Difficoltà: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="107"/>
+        <location filename="../qml/pages/FirstPage.qml" line="108"/>
         <source>No Game to Load</source>
         <translation type="unfinished">Nessuna Partita Salvata</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="157"/>
         <source>Saving...</source>
         <translation type="unfinished">Salvataggio...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="163"/>
+        <location filename="../qml/pages/FirstPage.qml" line="164"/>
         <source>Level </source>
         <translation type="unfinished">Livello </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="163"/>
+        <location filename="../qml/pages/FirstPage.qml" line="164"/>
         <source>Score </source>
         <translation type="unfinished">Punteggio </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="163"/>
+        <location filename="../qml/pages/FirstPage.qml" line="164"/>
         <source>Highscore </source>
         <translation type="unfinished">Record </translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="186"/>
+        <location filename="../qml/pages/FirstPage.qml" line="187"/>
         <source>Next</source>
         <translation type="unfinished">Successivo</translation>
     </message>
