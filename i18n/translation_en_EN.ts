@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="en_EN">
 <context>
     <name>About</name>
     <message>
         <location filename="../qml/pages/About.qml" line="20"/>
         <source>SailTris</source>
-        <translation type="unfinished">SailTris</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="24"/>
@@ -17,7 +17,7 @@
         <location filename="../qml/pages/About.qml" line="32"/>
         <source>To play select &apos;New Game&apos; in pulley menu!
 Swipe Left, Right or Down to move the block, click on the screen to Rotate it.
-Swipe Up to Pause the Game, to resume Pull Down to show the Pulley Menu</source>
+Swipe Up to Pause the Game, to resume Swipe Up to show the Pulley Menu</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -33,7 +33,7 @@ Every 1000 point you proceed to the next level, and the speed is increased!</sou
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="53"/>
-        <source> and check Wharehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, i would really appreciate! Click on the pic to donate :)</source>
+        <source> and check Warehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, I would really appreciate! Click on the pic to donate :)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -42,91 +42,108 @@ Every 1000 point you proceed to the next level, and the speed is increased!</sou
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="38"/>
         <source>SailTris</source>
-        <translation type="unfinished">SailTris</translation>
-    </message>
-</context>
-<context>
-    <name>DebugSettings</name>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="46"/>
-        <source>Debug Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="56"/>
-        <source> Seconds</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="57"/>
-        <source>Timer Interval</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="65"/>
-        <source>Enables Debug Mode</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/DebugSettings.qml" line="66"/>
-        <source>Shows grid numbers, speed values and MouseArea in green.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>FirstPage</name>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="63"/>
-        <source>About Page</source>
+        <location filename="../qml/pages/FirstPage.qml" line="64"/>
+        <source>Resume</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="67"/>
-        <source>New Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="71"/>
-        <source>Debug Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="89"/>
-        <source>Load Game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/FirstPage.qml" line="94"/>
+        <location filename="../qml/pages/FirstPage.qml" line="69"/>
         <source>Save Game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="100"/>
-        <source>Unpause</source>
+        <location filename="../qml/pages/FirstPage.qml" line="78"/>
+        <source>About Page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="149"/>
+        <location filename="../qml/pages/FirstPage.qml" line="82"/>
+        <source>Dots</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="82"/>
+        <source>Squares</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="83"/>
+        <source>Block Type: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
+        <source>Very Hard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
+        <source>Hard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
+        <source>Normal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
+        <source>Easy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="97"/>
+        <source>Very Easy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="98"/>
+        <source>Difficulty: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="102"/>
+        <source>New Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="108"/>
+        <source>Load Game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="108"/>
+        <source>No Game to Load</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/FirstPage.qml" line="157"/>
         <source>Saving...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="164"/>
         <source>Level </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="164"/>
         <source>Score </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="156"/>
+        <location filename="../qml/pages/FirstPage.qml" line="164"/>
         <source>Highscore </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="191"/>
+        <location filename="../qml/pages/FirstPage.qml" line="187"/>
         <source>Next</source>
         <translation type="unfinished"></translation>
     </message>

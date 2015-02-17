@@ -252,13 +252,19 @@ Page {
                     if ( Math.abs(prevY-mouseY) < Theme.paddingMedium &&
                          Math.abs(prevX-mouseX) < Theme.paddingMedium) { // Click
                         functions.rotate()
-                        console.log("Click")
+                        console.log("Tap")
                     }
                     else
                         if ( Math.abs(prevY-mouseY) > Math.abs(prevX-mouseX) )
                             if ( mouseY > prevY) {        // Swipe Down
-                                functions.down()
-                                console.log("Down")
+                                if ( !multiSwipe.running )
+                                    multiSwipe.start()
+                                else {
+                                    multiSwipe.stop()
+                                    functions.instantDown()
+                                    console.log("Double Down")
+                                }
+
                             } else {                        // Swipe Up
                                 functions.pause()
                                 console.log("Up")
@@ -271,6 +277,15 @@ Page {
                                 functions.left()
                                 console.log("Left")
                             }
+                }
+                Timer {
+                    id: multiSwipe
+                    running: false
+                    interval: 300
+                    onTriggered: {
+                        functions.down()
+                        console.log("Down")
+                    }
                 }
             }
         }

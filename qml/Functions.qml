@@ -578,6 +578,43 @@ Item {
         }
     }
 
+    // Instant Down
+
+    function instantDown() {
+        var min = 16
+        console.log("Min: " + min)
+        var down = 1
+        for (var i = 190; i > 12; i-- )
+            if (repeater.itemAt(i).active === 1 && repeater.itemAt(i+12).active > 1)
+                down = 0
+        if (down === 1) {
+            for ( i = 15; i > 0; i--)
+                for ( var j = 1; j < 11; j++) {
+                    var index = i*12+j
+                    if ( repeater.itemAt(index).active === 1 && repeater.itemAt(index + 12).active === 0 )
+                        for ( var k = i+1; k < 17; k++)
+                            if((repeater.itemAt(k*12+j).active === 2 || repeater.itemAt(k*12+j).active === 3) && min > k-i-1) {
+                                min = k-i-1
+                                k = 16
+                            }
+                }
+            for ( i = 15; i > 0; i--)
+                for ( j = 1; j < 11; j++) {
+                    index = i*12+j
+                    if ( repeater.itemAt(index).active === 1 ) {
+                        repeater.itemAt(index+12*min).color = repeater.itemAt(index).color
+                        repeater.itemAt(index+12*min).active = repeater.itemAt(index).active
+                        repeater.itemAt(index+12*min).opacity = repeater.itemAt(index).opacity
+                        repeater.itemAt(index).color = Theme.secondaryColor
+                        repeater.itemAt(index).active = 0
+                        repeater.itemAt(index).opacity = 0.1
+                    }
+
+                }
+            flow()
+        }
+    }
+
     // Down Traslation: ok!
 
     function down() {
@@ -597,7 +634,8 @@ Item {
                 }
             }
             centerY += 1
-        }
+        } else
+            flow()
     }
 
     // Left Traslation: ok!

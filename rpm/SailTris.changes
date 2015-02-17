@@ -8,7 +8,22 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.5-2
+* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.6-1
+- v0.6-1:
+-- WARNING: This update may delete your highscore and saved game, but it is mandatory
+-- Added instant drop
+-- Now the game is supported by Transifex, look in the description for the link!
+
+-- Fixed bug (I hope) that broke the game after latest update (thanks @elastic for reporting this bug)
+
+--- If you still have problems ( blocks are not falling, highscore is undefined )
+--- Execute in terminal:
+---   rm -rf /home/nemo/.local/share/SailTris
+--- (with S and T uppercase)
+
+-- KNOWN BUG: (Which have to be fixed)
+-- - Sometimes lines aren't cleared as expected
+
 - v0.5-2 :
 -- WARNING: This update may delete your highscore and saved game, but it is mandatory
 -- Now there are 5 different difficulty levels and defficulty is showed on screen
@@ -46,7 +61,7 @@
 #-- Included Italian translation
 #-- Re-organized game page
 
-- v0.2-1 :
+#- v0.2-1 :
 #-- Fixed About Page with links
 #-- Increased sensibility for fast consecutive swipes
 #-- Changed score system and added Levels

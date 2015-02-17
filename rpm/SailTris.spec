@@ -13,8 +13,8 @@ Name:       SailTris
 %{!?qtc_make:%define qtc_make make}
 %{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    SailTris
-Version:    0.5
-Release:    2
+Version:    0.6
+Release:    1
 Group:      Qt/Qt
 License:    LICENSE
 URL:        http://example.org/
@@ -41,6 +41,7 @@ Short description of my SailfishOS Application
 # >> build pre
 # << build pre
 
+
 %qtc_qmake5 
 
 %qtc_make %{?_smp_mflags}
@@ -60,6 +61,7 @@ rm -rf %{buildroot}
 desktop-file-install --delete-original       \
   --dir %{buildroot}%{_datadir}/applications             \
    %{buildroot}%{_datadir}/applications/*.desktop
+
 
 %files
 %defattr(-,root,root,-)
