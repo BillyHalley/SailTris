@@ -1,5 +1,5 @@
 function getDatabase() {
-     return LocalStorage.openDatabaseSync("SailTris", "0.1", "Database", 10000);
+     return LocalStorage.openDatabaseSync("sailtris_db", "0.1", "Database", 10000);
 }
 
 function set(setting, value) {

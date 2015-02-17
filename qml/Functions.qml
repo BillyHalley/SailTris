@@ -611,7 +611,6 @@ Item {
                     }
 
                 }
-            flow()
         }
     }
 
@@ -694,7 +693,7 @@ Item {
     function score() {
         var score = 0
         var lines = []
-        for (var i = 15; i > 0; i--) {
+        for (var i = 1; i < 16; i++) {
             var full = 0
             for (var j = 1; j < 11; j++) {
                 if (repeater.itemAt(i*12+j).active === 2) {
@@ -731,14 +730,12 @@ Item {
         // Da rivedere
 
         for (var k = 0; k < lines.length; k++) {
-            for ( i = lines[0]; i > 0; i--) {
+            for ( i = lines[k]; i > 0; i--) {
                 if ( i === 1) {
                     for ( j = 1; j < 11; j++) {
-                        if (repeater.itemAt(i*12+j).active !== 3){
-                            repeater.itemAt(i*12+j).color = Theme.secondaryColor
-                            repeater.itemAt(i*12+j).active = 0
-                            repeater.itemAt(i*12+j).opacity = 0.1
-                        }
+                        repeater.itemAt(i*12+j).color = Theme.secondaryColor
+                        repeater.itemAt(i*12+j).active = 0
+                        repeater.itemAt(i*12+j).opacity = 0.1
                     }
                 } else
                     for ( j = 1; j < 11; j++) {
@@ -746,14 +743,13 @@ Item {
                             repeater.itemAt(i*12+j).color = repeater.itemAt(i*12+j-12).color
                             repeater.itemAt(i*12+j).active = repeater.itemAt(i*12+j-12).active
                             repeater.itemAt(i*12+j).opacity = repeater.itemAt(i*12+j-12).opacity
-                            repeater.itemAt(i*12+j-12).color = Theme.secondaryColor
-                            repeater.itemAt(i*12+j-12).active = 0
-                            repeater.itemAt(i*12+j-12).opacity = 0.1
+                            //repeater.itemAt(i*12+j-12).color = Theme.secondaryColor
+                            //repeater.itemAt(i*12+j-12).active = 0
+                            //repeater.itemAt(i*12+j-12).opacity = 0.1
                         }
                     }
 
             }
         }
     }
-
 }

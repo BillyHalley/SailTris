@@ -21,7 +21,7 @@ Page {
     property int speedValue
     property real difficulty: Storage.get("difficulty") === 0 ? 1 : Storage.get("difficulty")
     property int level
-    property variant highscoreValue: Storage.get("highscore["+difficulty+"]")
+    property int highscoreValue: Storage.get("highscore["+difficulty+"]")
     property int activeBlock
     property int futureBlock: -1
     property int savedGame: Storage.get("savedGame")
@@ -106,6 +106,7 @@ Page {
                 id: loadMenuItem
                 onClicked: savedGame === 1 ? functions.loadGame() : savedGame +=0
                 text: savedGame === 1 ? qsTr("Load Game") : qsTr("No Game to Load")
+                enabled: savedGame === 1 ? true : false
             }
 
         }

@@ -8,43 +8,50 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.6-1
-- v0.6-1:
+* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.6-2
+- v0.6-2:
 -- WARNING: This update may delete your highscore and saved game, but it is mandatory
--- Added instant drop
--- Now the game is supported by Transifex, look in the description for the link!
+-- BugFix: Changed lines clearing algorythm
+-- Known Issue: Sometimes, in the same game session, i suppose, it does not save
 
--- Fixed bug (I hope) that broke the game after latest update (thanks @elastic for reporting this bug)
+#-- Fixed About page
 
---- If you still have problems ( blocks are not falling, highscore is undefined )
---- Execute in terminal:
----   rm -rf /home/nemo/.local/share/SailTris
---- (with S and T uppercase)
+#- v0.6-1:
+#-- WARNING: This update may delete your highscore and saved game, but it is mandatory
+#-- Added instant drop
+#-- Now the game is supported by Transifex, look in the description for the link!
 
--- KNOWN BUG: (Which have to be fixed)
--- - Sometimes lines aren't cleared as expected
+#-- Fixed bug (I hope) that broke the game after latest update (thanks @elastic for reporting this bug)
 
-- v0.5-2 :
--- WARNING: This update may delete your highscore and saved game, but it is mandatory
--- Now there are 5 different difficulty levels and defficulty is showed on screen
--- Different Highscore for each difficulty level
--- Speed algorithm changed a little bit (previously interval tended to 0, so it got pretty difficult very fast, now we have a limit for each difficulty level
--- Settings are now stored
--- Fixed About Page in English and Italian
--- BugFix: PushUpMenu works fine
--- KNOWN BUG: (Which have to be fixed)
--- - Sometimes lines aren't cleared as expected
--- Issues: (Don't know if are real bugs, can't reproduce)
--- - Highscore may result as undefined, maybe only the first time
--- - Once i wasn't able to save, maybe not a real problem
--- To Do: Instantaneous drop, Transifex translations
+#--- If you still have problems ( blocks are not falling, highscore is undefined )
+#--- Execute in terminal:
+#---   rm -rf /home/nemo/.local/share/SailTris
+#--- (with S and T uppercase)
 
-- v0.5-1:
--- Added 3 different difficulty levels
--- Changed difficulty algorithm, now speed increase faster with levels
--- Added options to change between dots and squares
--- Added PushUpMenu to Save and Resume game
--- KNOWN BUG: PushUpMenu is infinite (?)
+#-- KNOWN BUG: (Which have to be fixed)
+#-- - Sometimes lines aren't cleared as expected
+
+#- v0.5-2 :
+#-- WARNING: This update may delete your highscore and saved game, but it is mandatory
+#-- Now there are 5 different difficulty levels and defficulty is showed on screen
+#-- Different Highscore for each difficulty level
+#-- Speed algorithm changed a little bit (previously interval tended to 0, so it got pretty difficult very fast, now we have a limit for each difficulty level
+#-- Settings are now stored
+#-- Fixed About Page in English and Italian
+#-- BugFix: PushUpMenu works fine
+#-- KNOWN BUG: (Which have to be fixed)
+#-- - Sometimes lines aren't cleared as expected
+#-- Issues: (Don't know if are real bugs, can't reproduce)
+#-- - Highscore may result as undefined, maybe only the first time
+#-- - Once i wasn't able to save, maybe not a real problem
+#-- To Do: Instantaneous drop, Transifex translations
+
+#- v0.5-1:
+#-- Added 3 different difficulty levels
+#-- Changed difficulty algorithm, now speed increase faster with levels
+#-- Added options to change between dots and squares
+#-- Added PushUpMenu to Save and Resume game
+#-- KNOWN BUG: PushUpMenu is infinite (?)
 
 #- v0.4-2:
 #-- Fixed about page
