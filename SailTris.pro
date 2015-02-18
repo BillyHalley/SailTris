@@ -28,7 +28,8 @@ OTHER_FILES += qml/SailTris.qml \
     Donation.png \
     SailTris.desktop \
     i18n/translation_it_IT.ts \
-    qml/storage.js
+    qml/storage.js \
+    qml/pages/Settings.qml
 
 
 
@@ -38,7 +39,7 @@ OTHER_FILES += qml/SailTris.qml \
 # TRANSLATIONS += i18n/translation_it_IT.ts
 
 i18n.path = /usr/share/SailTris/i18n
-i18n.files = i18n/translation_it_IT.qm
+i18n.files = i18n/*.qm
 
 INSTALLS += i18n
 

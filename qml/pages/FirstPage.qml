@@ -16,7 +16,8 @@ import ".."
 
 Page {
     id: page
-    property int dots: Storage.get("dots") // 0 = dots; else = squares
+    property int dots: Storage.get("dots") // 0 = dots; 1 = squares
+    property bool ghostEnabled: Storage.get("ghostEnabled")
     property int scoreValue
     property int speedValue
     property real difficulty: Storage.get("difficulty") === 0 ? 1 : Storage.get("difficulty")
@@ -25,6 +26,8 @@ Page {
     property int activeBlock
     property int futureBlock: -1
     property int savedGame: Storage.get("savedGame")
+    property string difficultyText: difficulty === 0.5 ? qsTr("Very Hard") : difficulty === 0.75 ? qsTr("Hard") :difficulty === 1 ? qsTr("Normal") :difficulty === 1.5 ? qsTr("Easy") : qsTr("Very Easy")
+
 
     // 0 = l_normal; 1 = l_reverse;
     // 2 = s_normal; 3 = s_reverse;
@@ -75,30 +78,24 @@ Page {
         PullDownMenu {
             id: pullDownMenu
             MenuItem {
-                text: qsTr("About Page")
+                text: qsTr("About")
                 onClicked: pageStack.push("About.qml")
             }
+
             MenuItem {
-                property string type: dots === 0 ? qsTr("Dots") : qsTr("Squares")
-                text: qsTr("Block Type: ") + type
+                text: qsTr("Settings")
                 onClicked: {
-                    if (dots === 0) {
-                        dots = 1
-                        Storage.set("dots", 1)
-                    }
-                    else {
-                        dots = 0
-                        Storage.set("dots", 0)
-                    }
+                    var dialog = pageStack.push("Settings.qml", {"difficulty": difficulty, "dots": dots, "ghostEnabled": ghostEnabled})
+                    dialog.accepted.connect(function() {
+                        dots = dialog.dots
+                        difficulty = dialog.difficulty
+                        highscoreValue = dialog.highscoreValue
+                        ghostEnabled = dialog.ghostEnabled
+                    })
                 }
             }
-            MenuItem {
-                id: diffItem
-                property string diff: difficulty === 0.5 ? qsTr("Very Hard") : difficulty === 0.75 ? qsTr("Hard") : difficulty === 1 ? qsTr("Normal") : difficulty === 1.5 ? qsTr("Easy") : qsTr("Very Easy")
-                text: qsTr("Difficulty: ") + diff
-                onClicked: functions.setDifficulty()
-            }
-            MenuItem {
+
+           MenuItem {
                 text: qsTr("New Game")
                 onClicked: functions.newGame()
             }
@@ -162,7 +159,7 @@ Page {
 
         Label {
             id: score
-            text:  diffItem.diff + " \n" + qsTr("Level ") + "\n" + qsTr("Score ")  + "\n" + qsTr("Highscore ")
+            text:  difficultyText + " \n" + qsTr("Level ") + "\n" + qsTr("Score ")  + "\n" + qsTr("Highscore ")
             anchors {
                 bottom: futureGrid.bottom
                 left: parent.left

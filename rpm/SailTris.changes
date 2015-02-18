@@ -8,11 +8,19 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.6-2
+* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.7-1
+- v0.7-1
+-- Moved settings in settings page, pulley menu was too crowded
+-- Added option for Ghost Block
+
+- v0.6-3
+-- Fixed instant drop, now calls a new block
+
 - v0.6-2:
 -- WARNING: This update may delete your highscore and saved game, but it is mandatory
--- BugFix: Changed lines clearing algorythm
--- Known Issue: Sometimes, in the same game session, i suppose, it does not save
+-- Instant drop now doesn't immediatly call a new block, this caused some errors with score
+-- BugFix: Changed lines clearing algorithm
+-- Known Issue: Sometimes, in the same game session i suppose, it does not save
 
 #-- Fixed About page
 

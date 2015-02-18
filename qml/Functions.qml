@@ -5,8 +5,6 @@ import "storage.js" as Storage
 
 Item {
     id: functions
-    property int active: 0 // 0 = empty; 1 = active; 2 = inactive; 3 = wall
-    property int dots
 
     // New Game: ok!
 
@@ -46,6 +44,54 @@ Item {
         generate()
     }
 
+    function ghost() {
+        if ( ghostEnabled) {
+            var min = 16
+            console.log("Min: " + min)
+            for ( var i = 15; i > 0; i--)
+                for ( var j = 1; j < 11; j++) {
+                    var index = i*12+j
+                    if (repeater.itemAt(index).ghost) {
+                        repeater.itemAt(index).ghost = !repeater.itemAt(index).ghost
+                        if (repeater.itemAt(index).active === 0)
+                            repeater.itemAt(index).opacity = 0.1
+                        else
+                            repeater.itemAt(index).opacity = 1
+                    }
+                }
+            for (  i = 15; i > 0; i--)
+                for (  j = 1; j < 11; j++) {
+                    index = i*12+j
+                    if ( repeater.itemAt(index).active === 1 && repeater.itemAt(index + 12).active === 0 )
+                        for ( var k = i+1; k < 17; k++)
+                            if((repeater.itemAt(k*12+j).active === 2 || repeater.itemAt(k*12+j).active === 3) && min > k-i-1) {
+                                min = k-i-1
+                                k = 16
+                            }
+                }
+            for ( i = 15; i > 0; i--)
+                for ( j = 1; j < 11; j++) {
+                    index = i*12+j
+                    if ( repeater.itemAt(index).active === 1 &&  repeater.itemAt(index+12*min).active === 0) {
+                        repeater.itemAt(index+12*min).ghost = true
+                        repeater.itemAt(index+12*min).opacity = 0.5
+                    }
+                }
+        } else {
+            for ( i = 15; i > 0; i--)
+                for ( j = 1; j < 11; j++) {
+                    index = i*12+j
+                    if (repeater.itemAt(index).ghost) {
+                        repeater.itemAt(index).ghost = !repeater.itemAt(index).ghost
+                        if (repeater.itemAt(index).active === 0)
+                            repeater.itemAt(index).opacity = 0.1
+                        else
+                            repeater.itemAt(index).opacity = 1
+                    }
+                }
+        }
+    }
+
     // Pause: ok!
 
     function pause() {
@@ -54,6 +100,7 @@ Item {
         root.interactive = !root.interactive
         mouseArea.enabled = !mouseArea.enabled
         downTimer.running = !downTimer.running
+        ghost()
     }
 
 
@@ -359,6 +406,7 @@ Item {
                 repeater.itemAt( y[i] * 12 + x[i] ).opacity = 1
             }
         }
+        ghost()
     }
 
     // Random choice of tetramino: ok!
@@ -515,6 +563,8 @@ Item {
                 }
             }
         }
+
+        ghost()
     }
 
     // Game over: ok!
@@ -584,13 +634,20 @@ Item {
         var min = 16
         console.log("Min: " + min)
         var down = 1
-        for (var i = 190; i > 12; i-- )
-            if (repeater.itemAt(i).active === 1 && repeater.itemAt(i+12).active > 1)
-                down = 0
+        for (var i = 15; i > 0; i--)
+            for ( var j = 1; j < 11; j++) {
+                var index = i*12+j
+                if (repeater.itemAt(index).active === 1 && repeater.itemAt(index+12).active > 1) {
+                    down = 0
+                    console.log("down " + down)
+                }
+            }
+        console.log("down " + down)
+
         if (down === 1) {
             for ( i = 15; i > 0; i--)
-                for ( var j = 1; j < 11; j++) {
-                    var index = i*12+j
+                for ( j = 1; j < 11; j++) {
+                    index = i*12+j
                     if ( repeater.itemAt(index).active === 1 && repeater.itemAt(index + 12).active === 0 )
                         for ( var k = i+1; k < 17; k++)
                             if((repeater.itemAt(k*12+j).active === 2 || repeater.itemAt(k*12+j).active === 3) && min > k-i-1) {
@@ -603,8 +660,8 @@ Item {
                     index = i*12+j
                     if ( repeater.itemAt(index).active === 1 ) {
                         repeater.itemAt(index+12*min).color = repeater.itemAt(index).color
-                        repeater.itemAt(index+12*min).active = repeater.itemAt(index).active
-                        repeater.itemAt(index+12*min).opacity = repeater.itemAt(index).opacity
+                        repeater.itemAt(index+12*min).active = 1
+                        repeater.itemAt(index+12*min).opacity = 1
                         repeater.itemAt(index).color = Theme.secondaryColor
                         repeater.itemAt(index).active = 0
                         repeater.itemAt(index).opacity = 0.1
@@ -612,6 +669,7 @@ Item {
 
                 }
         }
+        flow()
     }
 
     // Down Traslation: ok!
@@ -658,6 +716,7 @@ Item {
             }
             centerX -= 1
         }
+        ghost()
     }
 
     // Right traslation: ok!
@@ -681,6 +740,7 @@ Item {
             }
             centerX += 1
         }
+        ghost()
     }
 
     // Score function:
