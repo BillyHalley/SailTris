@@ -15,6 +15,7 @@ Item {
         mouseArea.enabled = true
         pushUpMenu.enabled = false
         downTimer.running = true
+        pauseVal = false
 
         // Empty grids
 
@@ -95,12 +96,16 @@ Item {
     // Pause: ok!
 
     function pause() {
+        pauseVal = !pauseVal
         pullDownMenu.enabled = !pullDownMenu.enabled
         pushUpMenu.enabled = !pushUpMenu.enabled
         root.interactive = !root.interactive
         mouseArea.enabled = !mouseArea.enabled
         downTimer.running = !downTimer.running
-        ghost()
+        if (pause) {
+            comboTimeout.running = false
+        } else if ( combo > 1 )
+            comboTimeout.running = true
     }
 
 
@@ -125,6 +130,7 @@ Item {
     }
 
     function loadGame() {
+        pauseVal = false
         for (var i = 15; i > 0; i--)
             for (var j = 1; j < 11; j++) {
                 var index = i*12+j
@@ -354,7 +360,7 @@ Item {
 
     function rotate() {
         var x = [], newX = [], originX = [], tempX = [],
-            y = [], newY = [], originY = [], tempY = []
+                y = [], newY = [], originY = [], tempY = []
 
         for (var i = 15; i > 0; i--)
             for (var j = 1; j < 11; j++)
@@ -571,9 +577,7 @@ Item {
 
     function gameOver() {
         var index = difficulty
-        pullDownMenu.enabled = true
         pushUpMenu.enabled = false
-        root.interactive = true
         mouseArea.enabled = false
         downTimer.running = false
         if (scoreValue > highscoreValue) {
@@ -581,22 +585,78 @@ Item {
             highscoreValue = scoreValue
         }
         scoreValue -= 1
-        console.log("Game Over")
+        gameOverTimer.running = true
     }
 
-    function setDifficulty() {
-        if ( difficulty === 2 )
-            difficulty = 1.5
-        else if ( difficulty === 1.5 )
-            difficulty = 1
-        else if ( difficulty === 1 )
-            difficulty = 0.75
-        else if ( difficulty === 0.75 )
-            difficulty = 0.5
-        else if ( difficulty === 0.5 )
-            difficulty = 2
-        highscoreValue = Storage.get("highscore["+difficulty+"]")
-        Storage.set("difficulty", difficulty)
+
+    // Gravity bonus
+
+    function gravity() {
+        var count = 0
+        for (var i = 15; i > 0; i--)
+            for ( var j = 10; j > 0; j--) {
+                var index = i*12+j
+                if ( repeater.itemAt(index).active === 0) {
+                    for ( var k = 1; k < i; k++) {
+                        if (repeater.itemAt(index-12*k).active === 2) {
+                            repeater.itemAt(index).active = repeater.itemAt(index-12*k).active
+                            repeater.itemAt(index).opacity = repeater.itemAt(index-12*k).opacity
+                            repeater.itemAt(index).color = repeater.itemAt(index-12*k).color
+                            repeater.itemAt(index-12*k).active = 0
+                            repeater.itemAt(index-12*k).opacity = 0.1
+                            repeater.itemAt(index-12*k).color = Theme.secondaryColor
+                            break
+                        }
+                    }
+                }
+            }
+        var score = 0
+        var lines = []
+        for ( i = 1; i < 16; i++) {
+            var full = 0
+            for ( j = 1; j < 11; j++) {
+                if (repeater.itemAt(i*12+j).active === 2) {
+                    full++
+                }
+            }
+            if (full === 10)
+                lines[lines.length] = i
+        }
+        console.log("Full lines: " + lines)
+        score += lines.length*10
+
+        scoreValue += score
+        speedValue += score
+
+        // Increase Level
+
+        if ( speedValue > 1000){
+            speedValue = 0
+            level += 1
+            console.log("Timer set: " + downTimer.interval)
+        }
+
+        // Da rivedere ( forse ora va bene )
+
+        for ( k = 0; k < lines.length; k++) {
+            for ( i = lines[k]; i > 0; i--) {
+                if ( i === 1) {
+                    for ( j = 1; j < 11; j++) {
+                        repeater.itemAt(i*12+j).color = Theme.secondaryColor
+                        repeater.itemAt(i*12+j).active = 0
+                        repeater.itemAt(i*12+j).opacity = 0.1
+                    }
+                } else
+                    for ( j = 1; j < 11; j++) {
+                        if (repeater.itemAt(i*12+j).active !== 3){
+                            repeater.itemAt(i*12+j).color = repeater.itemAt(i*12+j-12).color
+                            repeater.itemAt(i*12+j).active = repeater.itemAt(i*12+j-12).active
+                            repeater.itemAt(i*12+j).opacity = repeater.itemAt(i*12+j-12).opacity
+                        }
+                    }
+
+            }
+        }
     }
 
     // Down Flow Traslation: ok!
@@ -766,16 +826,31 @@ Item {
         console.log("Full lines: " + lines)
         score += lines.length*10
 
+
         // Bonus
 
-        if (lines.length > 1) {
+        if (lines.length > 0) {
+            if ( comboTimeout.running ) {
+                combo += 1
+                gravityBreak += 1
+                if ( combo > 1) {
+                    comboLabel.opacity = 1
+                    comboTimer.running = true
+                }
+                for (var index = 0; index < 204; index++)
+                    if ( repeater.itemAt(index).active === 3)
+                        repeater.itemAt(index).glowing = true
+            }
+            comboTimeout.restart()
+            score = score*combo
             if (lines.length === 4)
                 score += 1000
             else
                 score += 100*lines.length
+
+            console.log("combo: " + combo)
         }
 
-        score = score
         scoreValue += score
         speedValue += score
 
@@ -787,7 +862,7 @@ Item {
             console.log("Timer set: " + downTimer.interval)
         }
 
-        // Da rivedere
+        // Da rivedere ( forse ora va bene )
 
         for (var k = 0; k < lines.length; k++) {
             for ( i = lines[k]; i > 0; i--) {
@@ -803,13 +878,35 @@ Item {
                             repeater.itemAt(i*12+j).color = repeater.itemAt(i*12+j-12).color
                             repeater.itemAt(i*12+j).active = repeater.itemAt(i*12+j-12).active
                             repeater.itemAt(i*12+j).opacity = repeater.itemAt(i*12+j-12).opacity
-                            //repeater.itemAt(i*12+j-12).color = Theme.secondaryColor
-                            //repeater.itemAt(i*12+j-12).active = 0
-                            //repeater.itemAt(i*12+j-12).opacity = 0.1
                         }
                     }
 
             }
         }
+        if ( gravityBreak === 4 ) { // Insert Gravity label
+            console.log("Combo break! Gravity!")
+            gravityBreak = 0
+            gravityLabel.opacity = 1
+            gravityTimer.running = true
+            gravity()
+        }
     }
-}
+    Timer {
+        id: comboTimeout
+        running: false
+        repeat: false
+        interval: 10000*difficulty
+        onTriggered: {
+            for (var index = 0; index < 204; index++) {
+                if ( repeater.itemAt(index).active === 3){
+                    repeater.itemAt(index).glowing = false
+                    repeater.itemAt(index).opacity = 1
+                }
+            }
+            comboEndLabelTimer.running = true
+            combo = 1
+            gravityBreak = 1
+        }
+    }
+} // Item End
+

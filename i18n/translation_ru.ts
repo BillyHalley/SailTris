@@ -1,45 +1,40 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="en_EN">
+<?xml version="1.0" ?><!DOCTYPE TS><TS language="ru" version="2.0">
 <context>
     <name>About</name>
     <message>
         <location filename="../qml/pages/About.qml" line="20"/>
         <source>SailTris</source>
-        <translation type="unfinished"></translation>
+        <translation>SailTris</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="24"/>
         <source>Classic tetris game, in SailfishOS style!</source>
-        <translation type="unfinished"></translation>
+        <translation>Классический тетрис в стиле SailfishOS!</translation>
     </message>
     <message>
         <location filename="../qml/pages/About.qml" line="32"/>
-        <source>To play select &apos;New Game&apos; in pulley menu!
+        <source>To play select 'New Game' in pulley menu!
 Swipe Left, Right or Down to move the block, click on the screen to Rotate it.
 Swipe Up to Pause the Game, to resume Swipe Up to show the Pulley Menu</source>
-        <translation type="unfinished"></translation>
+        <translation>Для начала игры выберите &quot;Новая игра&quot; в меню!
+Свайп влево, вправо или вниз двигает блоки, нажатие на экран поворачивает их.
+Свайв вверх ставит игру на паузу, еще один свайп покажет меню</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="41"/>
-        <source>You gain 1 point for each step in the game and 10 points for each completed line! Multiple lines combo gives you 100 bonus points for each line completed! And 1000 points when four lines are cleared!!</source>
-        <translation type="unfinished"></translation>
+        <location filename="../qml/pages/About.qml" line="40"/>
+        <source>You gain 1 point for each step in the game and 10 points for each completed line! Multiple lines combo gives you 100 bonus points for each line completed! And 1000 points when four lines are cleared!!
+Every 1000 point you proceed to the next level, and the speed is increased!</source>
+        <translation type="unfinished"/>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="49"/>
-        <source>Do you prefer to play fast, more than strategically? If you can fill more lines consecutively you gain special Bonuses!
-In each case every 1000 point you proceed to the next level, and the speed is increased!</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../qml/pages/About.qml" line="61"/>
+        <location filename="../qml/pages/About.qml" line="53"/>
         <source>Follow the developement on </source>
-        <translation type="unfinished"></translation>
+        <translation>Следить за разработчиком на</translation>
     </message>
     <message>
-        <location filename="../qml/pages/About.qml" line="61"/>
+        <location filename="../qml/pages/About.qml" line="53"/>
         <source> and check Warehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, I would really appreciate! Click on the pic to donate :)</source>
-        <translation type="unfinished"></translation>
+        <translation>и проверяйте Warehouse  на наличие обновлений. Это приложение написано BillyHalley&apos;ом, если Вам оно нравиться, сделайте небольшое пожертвование, разработчик будет очень признателен! Нажмите на картинку, чтобы пожертвовать :)</translation>
     </message>
 </context>
 <context>
@@ -47,7 +42,7 @@ In each case every 1000 point you proceed to the next level, and the speed is in
     <message>
         <location filename="../qml/cover/CoverPage.qml" line="38"/>
         <source>SailTris</source>
-        <translation type="unfinished"></translation>
+        <translation>SailTris</translation>
     </message>
 </context>
 <context>
@@ -55,87 +50,87 @@ In each case every 1000 point you proceed to the next level, and the speed is in
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="29"/>
         <source>Very Hard</source>
-        <translation type="unfinished"></translation>
+        <translation>Очень тяжелый</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="29"/>
         <source>Hard</source>
-        <translation type="unfinished"></translation>
+        <translation>Тяжелый</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="29"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормальный</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="29"/>
         <source>Easy</source>
-        <translation type="unfinished"></translation>
+        <translation>Легкий</translation>
     </message>
     <message>
         <location filename="../qml/pages/FirstPage.qml" line="29"/>
         <source>Very Easy</source>
-        <translation type="unfinished"></translation>
+        <translation>Очень легкий</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="121"/>
+        <location filename="../qml/pages/FirstPage.qml" line="67"/>
         <source>Resume</source>
-        <translation type="unfinished"></translation>
+        <translation>Итого</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="126"/>
+        <location filename="../qml/pages/FirstPage.qml" line="72"/>
         <source>Save Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить игру</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="135"/>
+        <location filename="../qml/pages/FirstPage.qml" line="81"/>
         <source>About</source>
-        <translation type="unfinished"></translation>
+        <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="140"/>
+        <location filename="../qml/pages/FirstPage.qml" line="86"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="153"/>
+        <location filename="../qml/pages/FirstPage.qml" line="99"/>
         <source>New Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая игра</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="159"/>
+        <location filename="../qml/pages/FirstPage.qml" line="105"/>
         <source>Load Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Загрузить игру</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="159"/>
+        <location filename="../qml/pages/FirstPage.qml" line="105"/>
         <source>No Game to Load</source>
-        <translation type="unfinished"></translation>
+        <translation>Нет вариантов для загрузки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="209"/>
+        <location filename="../qml/pages/FirstPage.qml" line="155"/>
         <source>Saving...</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранение...</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="216"/>
+        <location filename="../qml/pages/FirstPage.qml" line="162"/>
         <source>Level </source>
-        <translation type="unfinished"></translation>
+        <translation>Уровень</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="216"/>
+        <location filename="../qml/pages/FirstPage.qml" line="162"/>
         <source>Score </source>
-        <translation type="unfinished"></translation>
+        <translation>Гол</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="216"/>
+        <location filename="../qml/pages/FirstPage.qml" line="162"/>
         <source>Highscore </source>
-        <translation type="unfinished"></translation>
+        <translation>Рекорд</translation>
     </message>
     <message>
-        <location filename="../qml/pages/FirstPage.qml" line="240"/>
+        <location filename="../qml/pages/FirstPage.qml" line="185"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующий</translation>
     </message>
 </context>
 <context>
@@ -143,67 +138,67 @@ In each case every 1000 point you proceed to the next level, and the speed is in
     <message>
         <location filename="../qml/pages/Settings.qml" line="24"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="33"/>
         <source>Difficulty</source>
-        <translation type="unfinished"></translation>
+        <translation>Трудность</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="36"/>
         <source>Very Hard</source>
-        <translation type="unfinished"></translation>
+        <translation>Очень тяжелый</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="38"/>
         <source>Hard</source>
-        <translation type="unfinished"></translation>
+        <translation>Тяжелый</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="40"/>
         <source>Normal</source>
-        <translation type="unfinished"></translation>
+        <translation>Нормальный</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="42"/>
         <source>Easy</source>
-        <translation type="unfinished"></translation>
+        <translation>Легкий</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="44"/>
         <source>Very Easy</source>
-        <translation type="unfinished"></translation>
+        <translation>Очень легкий</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="56"/>
         <source>Squares</source>
-        <translation type="unfinished"></translation>
+        <translation>Площади</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="56"/>
         <source>Dots</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished"/>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="57"/>
         <source>Changes the shape of the blocks</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить форму блоков</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="73"/>
         <source>Ghost Enabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Призрак включен</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="73"/>
         <source>Ghost Disabled</source>
-        <translation type="unfinished"></translation>
+        <translation>Призрак выключен</translation>
     </message>
     <message>
         <location filename="../qml/pages/Settings.qml" line="74"/>
         <source>Display a hint of where the block will fall</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать подсказку</translation>
     </message>
 </context>
 </TS>

@@ -8,19 +8,41 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Sun Feb 15 2014 Billy Halley <ziobilly94@gmail.com> 0.7-1
+* Wed Mar 04 2014 Billy Halley <ziobilly94@gmail.com> 0.8-2
+- v0.8-2
+-- Now there is more time for Combos, it is always related to difficulty
+-- Added Russian, Spanish and Dutch translations, thanks to lewa, carmenfdezb and Vistaus
+-- Fixed About Page, so are needed new translations for existing language
+-- To Do:
+-- - Fix combo behaviour when pausing and saving
+-- - Fix and fasten saving process
+
+- v0.8-1
+-- Added Combo Multiplier
+-- Added Gravity Bonus
+-- Added Finnish translation, thanks to tuomakin
+-- To Do:
+-- - Insert Combo instructions in About Page
+-- - Fix combo behaviour when pausing and saving
+-- - Fix and fasten saving process
+
+- v0.7-2
+-- Fixed GameOver animation
+
 - v0.7-1
 -- Moved settings in settings page, pulley menu was too crowded
 -- Added option for Ghost Block
+-- Added animation for Game Over
+-- Added French translation, thanks to MohamedZ
 
-- v0.6-3
--- Fixed instant drop, now calls a new block
+#- v0.6-3
+#-- Fixed instant drop, now calls a new block
 
-- v0.6-2:
--- WARNING: This update may delete your highscore and saved game, but it is mandatory
--- Instant drop now doesn't immediatly call a new block, this caused some errors with score
--- BugFix: Changed lines clearing algorithm
--- Known Issue: Sometimes, in the same game session i suppose, it does not save
+#- v0.6-2:
+#-- WARNING: This update may delete your highscore and saved game, but it is mandatory
+#-- Instant drop now doesn't immediatly call a new block, this caused some errors with score
+#-- BugFix: Changed lines clearing algorithm
+#-- Known Issue: Sometimes, in the same game session i suppose, it does not save
 
 #-- Fixed About page
 

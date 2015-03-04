@@ -27,7 +27,9 @@ Page {
     property int futureBlock: -1
     property int savedGame: Storage.get("savedGame")
     property string difficultyText: difficulty === 0.5 ? qsTr("Very Hard") : difficulty === 0.75 ? qsTr("Hard") :difficulty === 1 ? qsTr("Normal") :difficulty === 1.5 ? qsTr("Easy") : qsTr("Very Easy")
-
+    property int combo: 1
+    property int gravityBreak: 1
+    property bool pauseVal
 
     // 0 = l_normal; 1 = l_reverse;
     // 2 = s_normal; 3 = s_reverse;
@@ -43,6 +45,58 @@ Page {
     Functions {
         id: functions
     }
+
+    Timer {
+        id: gameOverTimer
+        property int i: 15
+        property int j: 10
+        property bool clear: true
+        interval: 20
+        repeat: true
+        onTriggered : {
+            if (clear) {
+                if ( j === 0) {
+                    i--
+                    j = 10
+                } else {
+                    if ( i === 0) {
+                        clear = false
+                        j = 10
+                        i = 15
+                    } else {
+                        var index = i*12+j
+                        console.log(index)
+                        repeater.itemAt(index).color = Theme.secondaryColor
+                        repeater.itemAt(index).opacity = 0.5
+                        j--
+                    }
+                }
+            } else {
+                if ( j === 0) {
+                    i--
+                    j = 10
+                } else {
+                    if ( i === 0) {
+                        running = false
+                        clear = true
+                        root.interactive = true
+                        pullDownMenu.enabled = true
+                        scoreValue = 0
+                        level = 0
+                        i = 15
+                        j = 10
+                    }
+                    else {
+                        index = i*12+j
+                        console.log(index)
+                        repeater.itemAt(index).opacity = 0.1
+                        j--
+                    }
+                }
+            }
+        }
+    }
+
 
     Timer {
         id: downTimer
@@ -172,6 +226,7 @@ Page {
             text:  level + "\n" + scoreValue + "\n" + highscoreValue
             anchors {
                 left: score.right
+                leftMargin: Theme.paddigMedium
                 bottom: score.bottom
             }
         }
@@ -204,6 +259,16 @@ Page {
         }
 
         Rectangle {
+            id: rect
+            width: grid.width
+            height: grid.height
+            anchors {
+                bottom: parent.bottom
+                bottomMargin: Theme.paddingMedium
+            }
+            border.color: "transparent"
+            color: "transparent"
+            opacity: 1
             // Dots grid
             Grid {
                 id: grid
@@ -219,21 +284,9 @@ Page {
                             itemAt(index).color = Theme.highlightColor
                             itemAt(index).opacity = 1
                         }
-                    }
+                     }
                 }
             }
-
-            id: rect
-            width: grid.width
-            height: grid.height
-            anchors {
-                bottom: parent.bottom
-                bottomMargin: Theme.paddingMedium
-            }
-            border.color: "transparent"
-            color: "transparent"
-            opacity: 1
-
             MouseArea {
                 id: mouseArea
                 enabled: false
@@ -284,6 +337,75 @@ Page {
                         functions.down()
                         console.log("Down")
                     }
+                }
+            }
+            Label {
+                id: comboLabel
+                anchors {
+                    horizontalCenter: rect.horizontalCenter
+                    verticalCenter: rect.verticalCenter
+                }
+                text: "Combo x " + combo
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeHuge
+                opacity: 0
+            }
+            Label {
+                id: comboEndLabel
+                anchors {
+                    horizontalCenter: rect.horizontalCenter
+                    verticalCenter: rect.verticalCenter
+                }
+                text: "Lost Combo"
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeHuge
+                opacity: 0
+            }
+            Label {
+                id: gravityLabel
+                anchors {
+                    bottom: comboLabel.top
+                    horizontalCenter: rect.horizontalCenter
+                }
+                text: "Gravity Bonus"
+                color: Theme.highlightColor
+                font.pixelSize: Theme.fontSizeHuge
+                opacity: 0
+            }
+            Timer {
+                id: comboTimer
+                running: false
+                repeat: true
+                interval: 100
+                onTriggered: {
+                    if ( comboLabel.opacity === 0)
+                        running = false
+                    else
+                        comboLabel.opacity -= 0.05
+                }
+            }
+            Timer {
+                id: gravityTimer
+                running: false
+                repeat: true
+                interval: 100
+                onTriggered: {
+                    if ( gravityLabel.opacity === 0)
+                        running = false
+                    else
+                        gravityLabel.opacity -= 0.05
+                }
+            }
+            Timer {
+                id: comboEndLabelTimer
+                running: false
+                repeat: true
+                interval: 100
+                onTriggered: {
+                    if ( comboEndLabel.opacity === 0)
+                        running = false
+                    else
+                        comboEndLabel.opacity -= 0.1
                 }
             }
         }

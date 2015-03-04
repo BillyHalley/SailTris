@@ -35,15 +35,23 @@ Page {
                 horizontalAlignment: Text.AlignJustify
                 wrapMode: Text.WordWrap
             }
+
             Label {
                 width: parent.width
-                text: qsTr("You gain 1 point for each step in the game and 10 points for each completed line! Multiple lines combo gives you 100 bonus points for each line completed! And 1000 points when four lines are cleared!!\nEvery 1000 point you proceed to the next level, and the speed is increased!")
+                text: qsTr("You gain 1 point for each step in the game and 10 points for each completed line! Multiple lines combo gives you 100 bonus points for each line completed! And 1000 points when four lines are cleared!!")
                 color: Theme.secondaryColor
                 font.pixelSize: Theme.fontSizeSmall
                 horizontalAlignment: Text.AlignJustify
                 wrapMode: Text.WordWrap
             }
-
+            Label {
+                width: parent.width
+                text: qsTr("Do you prefer to play fast, more than strategically? If you can fill more lines consecutively you gain special Bonuses!\nIn each case every 1000 point you proceed to the next level, and the speed is increased!")
+                color: Theme.secondaryColor
+                font.pixelSize: Theme.fontSizeSmall
+                horizontalAlignment: Text.AlignJustify
+                wrapMode: Text.WordWrap
+            }
             Row {
                 spacing: Theme.paddingLarge
                 Label {
