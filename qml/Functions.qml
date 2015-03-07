@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtQuick.LocalStorage 2.0
-import "storage.js" as Storage
+import harbour.sailtris.FileIO 1.0
 
 Item {
     id: functions
@@ -48,7 +47,7 @@ Item {
     function ghost() {
         if ( ghostEnabled) {
             var min = 16
-            console.log("Min: " + min)
+            //console.log("Min: " + min)
             for ( var i = 15; i > 0; i--)
                 for ( var j = 1; j < 11; j++) {
                     var index = i*12+j
@@ -102,48 +101,69 @@ Item {
         root.interactive = !root.interactive
         mouseArea.enabled = !mouseArea.enabled
         downTimer.running = !downTimer.running
-        if (pause) {
+        if (pauseVal) {
+            console.log("pause " + countTimer.count)
             comboTimeout.running = false
-        } else if ( combo > 1 )
+            countTimer.running = false
+            for (var index = 0; index < 204; index++) {
+                if ( repeater.itemAt(index).active === 3){
+                    repeater.itemAt(index).glowing = false
+                    repeater.itemAt(index).opacity = 1
+                }
+            }
+        } else if ( combo > 1 ) {
+            console.log("restart " + countTimer.count)
             comboTimeout.running = true
+            countTimer.running = true
+            for ( index = 0; index < 204; index++)
+                if ( repeater.itemAt(index).active === 3)
+                    repeater.itemAt(index).glowing = true
+        }
     }
 
 
     function saveGame() {
-        savingPage.visible = true
-        savingTimer.running = true
-        pullDownMenu.enabled = false
-        pushUpMenu.enabled = false
-        root.interactive = false
-        Storage.set("savedGame", 1)
-        Storage.set("activeColor", activeColor)
-        Storage.set("futureColor", futureColor)
-        Storage.set("centerX", centerX)
-        Storage.set("centerY", centerY)
-        Storage.set("activeBlock", activeBlock)
-        Storage.set("futureBlock", futureBlock)
-        Storage.set("scoreValue", scoreValue)
-        Storage.set("speedValue", speedValue)
-        Storage.set("level", level)
-        Storage.set("savedDifficulty", difficulty)
+        var values = [activeColor, centerX, centerY, activeBlock, futureBlock, scoreValue, speedValue, level, difficulty]
+        fileIO.save(1,values)
+        var active = []
+        for (var i = 0; i < 204; i++)
+            active[i] = repeater.itemAt(i).active
+        fileIO.save(1, "active", active)
+        var color = []
+        for (i = 0; i < 204; i++)
+            color[i] = repeater.itemAt(i).color
+        fileIO.save(1, "color", color)
+        fileIO.write("Slot1",1)
         savedGame = 1
     }
 
     function loadGame() {
-        pauseVal = false
-        for (var i = 15; i > 0; i--)
-            for (var j = 1; j < 11; j++) {
-                var index = i*12+j
-                repeater.itemAt(index).active = Storage.get("Dot["+index+"].active")
-                repeater.itemAt(index).opacity = Storage.get("Dot["+index+"].opacity")
-                repeater.itemAt(index).color = Storage.get("Dot["+index+"].color")
-                console.log("Loading"+index)
-            }
-        activeColor = Storage.get("activeColor")
-        centerX = Storage.get("centerX")
-        centerY = Storage.get("centerY")
-        activeBlock = Storage.get("activeBlock")
-        futureBlock = Storage.get("futureBlock")
+        var active = []
+        active = fileIO.load(1, "active")
+        var color = []
+        color = fileIO.load(1, "color")
+        var values = []
+        values = fileIO.load(1)
+        console.log(values)
+
+        for ( var i = 0; i < 204; i++) {
+            repeater.itemAt(i).active = active[i]
+            repeater.itemAt(i).color = color[i]
+            if (repeater.itemAt(i).active === 0)
+                repeater.itemAt(i).opacity = 0.1
+            else
+                repeater.itemAt(i).opacity = 1
+        }
+        activeColor = values[0]
+        centerX     = values[1]
+        centerY     = values[2]
+        activeBlock = values[3]
+        futureBlock = values[4]
+        scoreValue  = values[5]
+        speedValue  = values[6]
+        level       = values[7]
+        difficulty  = values[8]
+
         switch (futureBlock) {
         case 0 :
             future_l_normal()
@@ -167,11 +187,8 @@ Item {
             future_line()
             break
         }
-        scoreValue = Storage.get("scoreValue")
-        speedValue = Storage.get("speedValue")
-        level = Storage.get("level")
-        difficulty = Storage.get("savedDifficulty")
-        pushUpMenu.enabled= true
+        ghost()
+        pause()
     }
 
     // Tetraminos Active: ok!
@@ -581,7 +598,7 @@ Item {
         mouseArea.enabled = false
         downTimer.running = false
         if (scoreValue > highscoreValue) {
-            Storage.set("highscore["+index+"]", scoreValue)
+            fileIO.write("highscore["+index+"]", scoreValue)
             highscoreValue = scoreValue
         }
         scoreValue -= 1
@@ -662,7 +679,7 @@ Item {
     // Down Flow Traslation: ok!
 
     function flow() {
-        console.log("Flow")
+        //console.log("Flow")
         var down = 1
         for (var i = 190; i > 12; i-- )
             if (repeater.itemAt(i).active === 1 && repeater.itemAt(i+12).active > 1)
@@ -841,6 +858,8 @@ Item {
                     if ( repeater.itemAt(index).active === 3)
                         repeater.itemAt(index).glowing = true
             }
+            countTimer.count = 0
+            countTimer.restart()
             comboTimeout.restart()
             score = score*combo
             if (lines.length === 4)
@@ -903,10 +922,30 @@ Item {
                     repeater.itemAt(index).opacity = 1
                 }
             }
+            comboEndLabel.opacity = 1
             comboEndLabelTimer.running = true
             combo = 1
             gravityBreak = 1
+            running = false
+            countTimer.running = false
+            countTimer.count = 0
         }
+    }
+    Timer {
+        id: countTimer
+        property int count: 0
+        running: false
+        repeat: true
+        interval: 1000*difficulty
+        onTriggered: {
+            if (count < 10)
+                count += 1
+            else
+                count = 0
+            console.log("Count: " + count)
+
+        }
+
     }
 } // Item End
 

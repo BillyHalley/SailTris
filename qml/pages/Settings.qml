@@ -1,7 +1,6 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtQuick.LocalStorage 2.0
-import "../storage.js" as Storage
+import harbour.sailtris.FileIO 1.0
 
 Dialog {
     id: page
@@ -9,6 +8,9 @@ Dialog {
     property int dots
     property int ghostEnabled
     property int highscoreValue
+    FileIO {
+        id: fileIO
+    }
 
 
     SilicaFlickable {
@@ -45,8 +47,8 @@ Dialog {
                 }
                 onValueChanged: {
                     difficulty = value === 5 ? 0.5 : value === 4 ? 0.75 : value === 3 ? 1 : value === 2 ? 1.5 : 2
-                    highscoreValue = Storage.get("highscore["+difficulty+"]")
-                    Storage.set("difficulty", difficulty)
+                    highscoreValue = fileIO.read("highscore["+difficulty+"]")
+                    fileIO.write("difficulty", difficulty)
                 }
             }
             TextSwitch {
@@ -58,11 +60,11 @@ Dialog {
                 onClicked: {
                     if (dots === 0) {
                         dots = 1
-                        Storage.set("dots", 1)
+                        fileIO.write("dots", 1)
                     }
                     else {
                         dots = 0
-                        Storage.set("dots", 0)
+                        fileIO.write("dots", 0)
                     }
                 }
             }
@@ -75,11 +77,11 @@ Dialog {
                 onClicked: {
                     if (ghostEnabled === 0) {
                         ghostEnabled = 1
-                        Storage.set("ghostEnabled", 1)
+                        fileIO.write("ghostEnabled", 1)
                     }
                     else {
                         ghostEnabled = 0
-                        Storage.set("ghostEnabled", 0)
+                        fileIO.write("ghostEnabled", 0)
                     }
                 }
             }

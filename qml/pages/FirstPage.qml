@@ -2,30 +2,37 @@
 **                                                                          **
 ** Created by Antonio Mancini                                               **
 ** Contact: <ziobilly94@gmail.com>                                          **
-** This is a version of classic Tetris game for SailfishOS compiled         **
+** This is a version of classic Tetris game for SailfishOS developed        **
 ** entirely by me, no copyright infringement intended.                      **
 **                                                                          **
 *****************************************************************************/
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtQuick.LocalStorage 2.0
-import "../storage.js" as Storage
+import harbour.sailtris.FileIO 1.0
 import ".."
 
 
 Page {
+
+    FileIO {
+        id: fileIO
+    }
+    Functions {
+        id: functions
+    }
+
     id: page
-    property int dots: Storage.get("dots") // 0 = dots; 1 = squares
-    property bool ghostEnabled: Storage.get("ghostEnabled")
+    property int dots: fileIO.read("dots") // 0 = dots; 1 = squares
+    property bool ghostEnabled: fileIO.read("ghostEnabled")
     property int scoreValue
     property int speedValue
-    property real difficulty: Storage.get("difficulty") === 0 ? 1 : Storage.get("difficulty")
+    property real difficulty: fileIO.read("difficulty") === '0' ? 1 : fileIO.read("difficulty")
     property int level
-    property int highscoreValue: Storage.get("highscore["+difficulty+"]")
+    property int highscoreValue: fileIO.read("highscore["+difficulty+"]")
     property int activeBlock
     property int futureBlock: -1
-    property int savedGame: Storage.get("savedGame")
+    property variant savedGame: fileIO.read("Slot1")
     property string difficultyText: difficulty === 0.5 ? qsTr("Very Hard") : difficulty === 0.75 ? qsTr("Hard") :difficulty === 1 ? qsTr("Normal") :difficulty === 1.5 ? qsTr("Easy") : qsTr("Very Easy")
     property int combo: 1
     property int gravityBreak: 1
@@ -41,10 +48,6 @@ Page {
 
     property real centerX
     property real centerY
-
-    Functions {
-        id: functions
-    }
 
     Timer {
         id: gameOverTimer
@@ -65,7 +68,6 @@ Page {
                         i = 15
                     } else {
                         var index = i*12+j
-                        console.log(index)
                         repeater.itemAt(index).color = Theme.secondaryColor
                         repeater.itemAt(index).opacity = 0.5
                         j--
@@ -88,7 +90,6 @@ Page {
                     }
                     else {
                         index = i*12+j
-                        console.log(index)
                         repeater.itemAt(index).opacity = 0.1
                         j--
                     }
@@ -149,66 +150,17 @@ Page {
                 }
             }
 
-           MenuItem {
+            MenuItem {
                 text: qsTr("New Game")
                 onClicked: functions.newGame()
             }
+
             MenuItem {
                 id: loadMenuItem
-                onClicked: savedGame === 1 ? functions.loadGame() : savedGame +=0
+                onClicked: functions.loadGame()
                 text: savedGame === 1 ? qsTr("Load Game") : qsTr("No Game to Load")
                 enabled: savedGame === 1 ? true : false
             }
-
-        }
-
-        Item {
-            id: savingPage
-            anchors.fill: parent
-            visible: false
-            z: 1
-            property int progress
-            property int total: 204
-
-            Timer {
-                id: savingTimer
-                interval: 1
-                running: false
-                repeat: true
-                property int index: 0
-                onTriggered: {
-                    if (index === 204) {
-                        stop()
-                        savingPage.visible = false
-                        pullDownMenu.enabled = true
-                        pushUpMenu.enabled = true
-                        root.interactive = true
-                    }  else {
-                        console.log("saving " + index)
-                        Storage.set("Dot["+index+"].active",repeater.itemAt(index).active)
-                        Storage.set("Dot["+index+"].opacity",repeater.itemAt(index).opacity)
-                        Storage.set("Dot["+index+"].color",repeater.itemAt(index).color)
-                        index += 1
-                        savingPage.progress += 1
-                    }
-                }
-            }
-
-            Rectangle {
-                anchors.fill: parent
-                color: "black"
-                opacity: 0.7
-            }
-            ProgressBar {
-                minimumValue: 0
-                maximumValue: savingPage.total
-                value: savingPage.progress
-                width: savingPage.width
-                anchors.verticalCenter: savingPage.verticalCenter
-                anchors.horizontalCenter: savingPage.horizontalCenter
-                label: qsTr("Saving...")
-            }
-
         }
 
         Label {
@@ -217,7 +169,6 @@ Page {
             anchors {
                 bottom: futureGrid.bottom
                 left: parent.left
-
                 leftMargin: Theme.paddingLarge
             }
         }
@@ -230,7 +181,6 @@ Page {
                 bottom: score.bottom
             }
         }
-
         Label {
             id: next
             anchors {
@@ -279,7 +229,15 @@ Page {
                     model: 204
                     delegate: Dot {width: page.width/12 ;color: Theme.secondaryColor; opacity: 0.1}
                     onItemAdded: { // Bordi "muro"... seriamente, si può fare di meglio, 576 caratteri per una linea è più brutto di questo commento, da aggiungere a newGame() magari
-                        if (index < 12 || index > 191 || index === 0 || index === 12 || index === 24 || index === 36 || index === 48 || index === 60 || index === 72 || index === 84 || index === 96 || index === 108 || index === 120 || index === 132 || index === 144 || index === 156 || index === 168 || index === 180 || index === 23 || index === 35 || index === 47 || index === 59 || index === 71 || index === 83 || index === 95 || index === 107 || index === 119 || index === 131 || index === 143 || index === 155 || index === 167 || index === 179 || index === 191) {
+                        if (index < 12 || index > 191 || index === 0 || index === 12 ||
+                            index === 24 || index === 36 || index === 48 || index === 60 ||
+                            index === 72 || index === 84 || index === 96 || index === 108 ||
+                            index === 120 || index === 132 || index === 144 || index === 156 ||
+                            index === 168 || index === 180 || index === 23 || index === 35 ||
+                            index === 47 || index === 59 || index === 71 || index === 83 ||
+                            index === 95 || index === 107 || index === 119 || index === 131 ||
+                            index === 143 || index === 155 || index === 167 || index === 179 || index === 191)
+                        {
                             itemAt(index).active = 3
                             itemAt(index).color = Theme.highlightColor
                             itemAt(index).opacity = 1
@@ -303,7 +261,7 @@ Page {
                     if ( Math.abs(prevY-mouseY) < Theme.paddingMedium &&
                          Math.abs(prevX-mouseX) < Theme.paddingMedium) { // Click
                         functions.rotate()
-                        console.log("Tap")
+                        //console.log("Tap")
                     }
                     else
                         if ( Math.abs(prevY-mouseY) > Math.abs(prevX-mouseX) )
@@ -313,20 +271,20 @@ Page {
                                 else {
                                     multiSwipe.stop()
                                     functions.instantDown()
-                                    console.log("Double Down")
+                                    //console.log("Double Down")
                                 }
 
                             } else {                        // Swipe Up
                                 functions.pause()
-                                console.log("Up")
+                                //console.log("Up")
                             }
                         else
                             if ( mouseX > prevX) {        // Swipe Right
                                 functions.right()
-                                console.log("Right")
+                                //console.log("Right")
                             } else {                        // Swipe Left
                                 functions.left()
-                                console.log("Left")
+                                //console.log("Left")
                             }
                 }
                 Timer {
@@ -335,7 +293,6 @@ Page {
                     interval: 300
                     onTriggered: {
                         functions.down()
-                        console.log("Down")
                     }
                 }
             }
@@ -356,7 +313,7 @@ Page {
                     horizontalCenter: rect.horizontalCenter
                     verticalCenter: rect.verticalCenter
                 }
-                text: "Lost Combo"
+                text: qsTr("Lost Combo")
                 color: Theme.highlightColor
                 font.pixelSize: Theme.fontSizeHuge
                 opacity: 0

@@ -28,14 +28,41 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-import QtQuick 2.0
-import Sailfish.Silica 1.0
-import "pages"
+//#ifdef QT_QML_DEBUG
+#include <QtQuick>
+//#endif
 
-ApplicationWindow
+#include <sailfishapp.h>
+
+#include <QFile>
+#include "lib/fileio.h"
+
+
+int main(int argc, char *argv[])
 {
-    initialPage: Component { FirstPage { } }
-    cover: Qt.resolvedUrl("cover/CoverPage.qml")
-}
+    // SailfishApp::main() will display "qml/template.qml", if you need more
+    // control over initialization, you can use:
+    //
+    //   - SailfishApp::application(int, char *[]) to get the QGuiApplication *
+    //   - SailfishApp::createView() to get a new QQuickView * instance
+    //   - SailfishApp::pathTo(QString) to get a QUrl to a resource file
+    //
+    // To display the view, call "show()" (will show fullscreen on device).
 
+    qmlRegisterType<FileIO, 1>("harbour.sailtris.FileIO", 1, 0, "FileIO");
+
+    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
+
+    QTranslator translator;
+    translator.load("translations_" + QLocale::system().name(),
+                    "/usr/share/harbour-sailtris/i18n");
+    app->installTranslator(&translator);
+
+    QScopedPointer<QQuickView> view(SailfishApp::createView());
+    view->setSource(SailfishApp::pathTo("qml/harbour-sailtris.qml"));
+    view->show();
+
+    return app->exec();
+    //return SailfishApp::main(argc, argv);
+}
 
