@@ -1,6 +1,5 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import harbour.sailtris.FileIO 1.0
 
 Item {
     id: functions
@@ -133,7 +132,7 @@ Item {
         for (i = 0; i < 204; i++)
             color[i] = repeater.itemAt(i).color
         fileIO.save(1, "color", color)
-        fileIO.write("Slot1",1)
+        fileIO.write("slot1",1)
         savedGame = 1
     }
 
@@ -187,8 +186,13 @@ Item {
             future_line()
             break
         }
+        pullDownMenu.enabled = false
+        root.interactive = false
+        mouseArea.enabled = true
+        pushUpMenu.enabled = false
+        downTimer.running = true
+        pauseVal = false
         ghost()
-        pause()
     }
 
     // Tetraminos Active: ok!
@@ -910,6 +914,7 @@ Item {
             gravity()
         }
     }
+
     Timer {
         id: comboTimeout
         running: false

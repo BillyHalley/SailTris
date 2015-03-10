@@ -21,15 +21,15 @@ OTHER_FILES += qml/harbour-sailtris.qml \
     rpm/harbour-sailtris.spec \
     rpm/harbour-sailtris.yaml \
     harbour-sailtris.desktop \
-    qml/Dot.qml \
-    qml/Functions.qml \
     qml/pages/FirstPage.qml \
     qml/pages/Settings.qml \
     qml/pages/About.qml \
-    qml/pages/Donation.png \
     qml/cover/CoverPage.qml \
     i18n/translation_it_IT.ts \
-    rpm/harbour-sailtris.changes
+    rpm/harbour-sailtris.changes \
+    pics/donation.png \
+    qml/elements/Dot.qml \
+    qml/elements/Functions.qml
 
 # to disable building translations every time, comment out the
 # following CONFIG line
@@ -45,6 +45,7 @@ i18n.path = /usr/share/harbour-sailtris/i18n
 i18n.files = i18n/*.qm
 
 INSTALLS += i18n
+
 HEADERS += \
     lib/fileio.h
 

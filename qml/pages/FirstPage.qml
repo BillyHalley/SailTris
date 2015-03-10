@@ -10,14 +10,14 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sailtris.FileIO 1.0
-import ".."
-
+import "../elements"
 
 Page {
 
     FileIO {
         id: fileIO
     }
+
     Functions {
         id: functions
     }
@@ -32,7 +32,7 @@ Page {
     property int highscoreValue: fileIO.read("highscore["+difficulty+"]")
     property int activeBlock
     property int futureBlock: -1
-    property variant savedGame: fileIO.read("Slot1")
+    property bool savedGame: fileIO.read("slot1") === '0' ? false : true
     property string difficultyText: difficulty === 0.5 ? qsTr("Very Hard") : difficulty === 0.75 ? qsTr("Hard") :difficulty === 1 ? qsTr("Normal") :difficulty === 1.5 ? qsTr("Easy") : qsTr("Very Easy")
     property int combo: 1
     property int gravityBreak: 1
@@ -158,8 +158,8 @@ Page {
             MenuItem {
                 id: loadMenuItem
                 onClicked: functions.loadGame()
-                text: savedGame === 1 ? qsTr("Load Game") : qsTr("No Game to Load")
-                enabled: savedGame === 1 ? true : false
+                text: savedGame ? qsTr("Load Game") : qsTr("No Game to Load")
+                enabled: savedGame ? true : false
             }
         }
 

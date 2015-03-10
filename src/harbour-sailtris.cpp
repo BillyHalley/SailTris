@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
     QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
 
     QTranslator translator;
-    translator.load("translations_" + QLocale::system().name(),
+    translator.load("translation_" + QLocale::system().name(),
                     "/usr/share/harbour-sailtris/i18n");
     app->installTranslator(&translator);
 

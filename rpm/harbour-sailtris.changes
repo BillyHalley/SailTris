@@ -8,12 +8,16 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
-* Fri Mar 06 2014 Billy Halley <ziobilly94@gmail.com> 0.9-1
-- v0.9-1
-- Fastened Saving process
-- Changed things that harbour didn't like
+* Tue Mar 10 2014 Billy Halley <ziobilly94@gmail.com> 0.9-2
 
-- v0.8-2
+- v0.9-2
+-- Still trying to build an rpm..
+
+- v0.9-1
+-- Fastened Saving process
+-- Changed things that harbour didn't like and trying to build an rpm
+
+#- v0.8-2
 -- Now there is more time for Combos, it is always related to difficulty
 -- Added Russian, Spanish and Dutch translations, thanks to lewa, carmenfdezb and Vistaus
 -- Fixed About Page, so are needed new translations for existing language
@@ -21,23 +25,23 @@
 -- - Fix combo behaviour when pausing and saving
 -- - Fix and fasten saving process
 
-- v0.8-1
--- Added Combo Multiplier
--- Added Gravity Bonus
--- Added Finnish translation, thanks to tuomakin
--- To Do:
--- - Insert Combo instructions in About Page
--- - Fix combo behaviour when pausing and saving
--- - Fix and fasten saving process
+#- v0.8-1
+#-- Added Combo Multiplier
+#-- Added Gravity Bonus
+#-- Added Finnish translation, thanks to tuomakin
+#-- To Do:
+#-- - Insert Combo instructions in About Page
+#-- - Fix combo behaviour when pausing and saving
+#-- - Fix and fasten saving process
 
-- v0.7-2
--- Fixed GameOver animation
+#- v0.7-2
+#-- Fixed GameOver animation
 
-- v0.7-1
--- Moved settings in settings page, pulley menu was too crowded
--- Added option for Ghost Block
--- Added animation for Game Over
--- Added French translation, thanks to MohamedZ
+#- v0.7-1
+#-- Moved settings in settings page, pulley menu was too crowded
+#-- Added option for Ghost Block
+#-- Added animation for Game Over
+#-- Added French translation, thanks to MohamedZ
 
 #- v0.6-3
 #-- Fixed instant drop, now calls a new block
