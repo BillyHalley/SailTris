@@ -28,13 +28,8 @@
   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-//#ifdef QT_QML_DEBUG
 #include <QtQuick>
-//#endif
-
 #include <sailfishapp.h>
-
-#include <QFile>
 #include "lib/fileio.h"
 
 
@@ -51,18 +46,6 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<FileIO, 1>("harbour.sailtris.FileIO", 1, 0, "FileIO");
 
-    QScopedPointer<QGuiApplication> app(SailfishApp::application(argc, argv));
-
-    QTranslator translator;
-    translator.load("translation_" + QLocale::system().name(),
-                    "/usr/share/harbour-sailtris/i18n");
-    app->installTranslator(&translator);
-
-    QScopedPointer<QQuickView> view(SailfishApp::createView());
-    view->setSource(SailfishApp::pathTo("qml/harbour-sailtris.qml"));
-    view->show();
-
-    return app->exec();
-    //return SailfishApp::main(argc, argv);
+    return SailfishApp::main(argc, argv);
 }
 

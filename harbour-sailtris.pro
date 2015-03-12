@@ -18,33 +18,33 @@ SOURCES += src/harbour-sailtris.cpp \
     lib/fileio.cpp
 
 OTHER_FILES += qml/harbour-sailtris.qml \
+    qml/cover/CoverPage.qml \
+    qml/pages/FirstPage.qml \
     rpm/harbour-sailtris.spec \
     rpm/harbour-sailtris.yaml \
+    translations/*.ts \
     harbour-sailtris.desktop \
-    qml/pages/FirstPage.qml \
     qml/pages/Settings.qml \
     qml/pages/About.qml \
-    qml/cover/CoverPage.qml \
-    i18n/translation_it_IT.ts \
-    rpm/harbour-sailtris.changes \
-    pics/donation.png \
-    qml/elements/Dot.qml \
-    qml/elements/Functions.qml
+    qml/Functions.qml \
+    qml/Dot.qml \
+    rpm/harbour-sailtris.changes
 
 # to disable building translations every time, comment out the
 # following CONFIG line
-#CONFIG += sailfishapp_i18n
+CONFIG += sailfishapp_i18n
 
 # German translation is enabled as an example. If you aren't
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-#TRANSLATIONS += translations/harbour-sailtris-de.ts
+TRANSLATIONS += translations/harbour-sailtris-es.ts \
+    translations/harbour-sailtris-fi.ts \
+    translations/harbour-sailtris-fr.ts \
+    translations/harbour-sailtris-it_IT.ts \
+    translations/harbour-sailtris-nl_NL.ts \
+    translations/harbour-sailtris-ru.ts
 
-i18n.path = /usr/share/harbour-sailtris/i18n
-i18n.files = i18n/*.qm
-
-INSTALLS += i18n
 
 HEADERS += \
     lib/fileio.h

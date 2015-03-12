@@ -73,7 +73,7 @@ Page {
                         height: imageText.height
                         width: imageText.width
                         fillMode: Image.PreserveAspectFit
-                        source: "../../pics/donation.png"
+                        source: "donation.png"
                     }
                     MouseArea {
                         width: image.width

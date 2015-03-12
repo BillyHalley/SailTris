@@ -10,7 +10,7 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import harbour.sailtris.FileIO 1.0
-import "../elements"
+import ".."
 
 Page {
 
