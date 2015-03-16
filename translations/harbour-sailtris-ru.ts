@@ -41,7 +41,7 @@ In each case every 1000 point you proceed to the next level, and the speed is in
     <message>
         <location filename="../qml/pages/About.qml" line="61"/>
         <source> and check Warehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, I would really appreciate! Click on the pic to donate :)</source>
-        <translation>и проверяйте Warehouse  на наличие обновлений. Это приложение написано BillyHalley&apos;ом, если Вам оно нравиться, сделайте небольшое пожертвование, разработчик будет очень признателен! Нажмите на картинку, чтобы пожертвовать :)</translation>
+        <translation> и проверяйте Warehouse  на наличие обновлений. Это приложение написано BillyHalley&apos;ом, если Вам оно нравиться, сделайте небольшое пожертвование, разработчик будет очень признателен! Нажмите на картинку, чтобы пожертвовать :)</translation>
     </message>
 </context>
 <context>

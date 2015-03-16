@@ -47,7 +47,7 @@ Jokaisen 1000 pisteen kohdalla pääset seuraavalle tasolle, jolloin pelin nopeu
     <message>
         <location filename="../qml/pages/About.qml" line="61"/>
         <source> and check Warehouse for updates. This app is completely written by BillyHalley, if you like it, please consider making a small donation, I would really appreciate! Click on the pic to donate :)</source>
-        <translation>ja tarkkaile Warehousea päivitysten varalta. Tämän ohjelman on kirjoittanut BillyHalley ja mikäli pidät siitä, voit halutessasi antaa pienen lahjoituksen. Paina kuvaa jatkaaksesi lahjoittamaan! :)</translation>
+        <translation> ja tarkkaile Warehousea päivitysten varalta. Tämän ohjelman on kirjoittanut BillyHalley ja mikäli pidät siitä, voit halutessasi antaa pienen lahjoituksen. Paina kuvaa jatkaaksesi lahjoittamaan! :)</translation>
     </message>
 </context>
 <context>
