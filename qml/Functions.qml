@@ -110,13 +110,14 @@ Item {
                     repeater.itemAt(index).opacity = 1
                 }
             }
-        } else if ( combo > 1 ) {
+        } else if ( combo >= 1 ) {
             console.log("restart " + countTimer.count)
             comboTimeout.running = true
             countTimer.running = true
-            for ( index = 0; index < 204; index++)
-                if ( repeater.itemAt(index).active === 3)
-                    repeater.itemAt(index).glowing = true
+            if (combo > 1)
+                for ( index = 0; index < 204; index++)
+                    if ( repeater.itemAt(index).active === 3)
+                        repeater.itemAt(index).glowing = true
         }
     }
 
@@ -132,6 +133,8 @@ Item {
         for (i = 0; i < 204; i++)
             color[i] = repeater.itemAt(i).color
         fileIO.save(1, "color", color)
+        fileIO.save("count", countTimer.count)
+        fileIO.save("combo",combo)
         fileIO.write("slot1",1)
         savedGame = 1
     }
@@ -162,7 +165,16 @@ Item {
         speedValue  = values[6]
         level       = values[7]
         difficulty  = values[8]
-
+        countTimer.count = fileIO.read("count")
+        combo = fileIO.read("combo")
+        if (combo > 1) {
+            console.log("restart " + countTimer.count)
+            comboTimeout.running = true
+            countTimer.running = true
+            for ( index = 0; index < 204; index++)
+                if ( repeater.itemAt(index).active === 3)
+                    repeater.itemAt(index).glowing = true
+        }
         switch (futureBlock) {
         case 0 :
             future_l_normal()
@@ -943,12 +955,23 @@ Item {
         repeat: true
         interval: 1000*difficulty
         onTriggered: {
-            if (count < 10)
-                count += 1
-            else
-                count = 0
+            count += 1
             console.log("Count: " + count)
-
+            if (count == 10) {
+                comboTimeout.stop()
+                for (var index = 0; index < 204; index++) {
+                    if ( repeater.itemAt(index).active === 3){
+                        repeater.itemAt(index).glowing = false
+                        repeater.itemAt(index).opacity = 1
+                    }
+                }
+                comboEndLabel.opacity = 1
+                comboEndLabelTimer.running = true
+                combo = 1
+                gravityBreak = 1
+                running = false
+                count = 0
+            }
         }
 
     }

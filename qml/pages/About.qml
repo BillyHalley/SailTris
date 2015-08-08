@@ -89,7 +89,7 @@ Page {
 
         }
 
-        VerticalScrollDecorator {flickable: flickable }
+        VerticalScrollDecorator { flickable: flickable }
 
     }
 
